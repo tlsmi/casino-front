@@ -1,0 +1,22 @@
+<p>login works!</p>
+
+<form [formGroup]="formularioLogin">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="hello@gmail.com" formControlName="email">
+        <mat-error *ngIf="formularioLogin.get('correo')?.hasError('required')">Este campo es obligatorio</mat-error>
+        <mat-error *ngIf="formularioLogin.controls?.correo?.errors?.email">El email introducido no cumple el formato correcto</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Contra</mat-label>
+        <input matInput formControlName="password" placeholder="password">
+        <mat-error>Este campo es obligatorio</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="iniciarSesion()" [disabled]="formularioLogin.invalid">Iniciar sesión</button>
+</form>
+
+
+<pre>
+    {{formularioLogin.value | json}}
+</pre>
