@@ -81,13 +81,7 @@ const Signup = () => {
       newErrors.email = '';
     }
 
-    // Validar la contraseña
-    if (!validatePassword(formData.password)) {
-      newErrors.password = 'La contraseña debe tener al menos 8 caracteres.';
-      valid = false;
-    } else {
-      newErrors.password = '';
-    }
+
 
     // Validar la repetición de la contraseña
     if (formData.password !== formData.passwordRep) {
@@ -111,9 +105,7 @@ const Signup = () => {
     return emailRegex.test(email);
   };
 
-  const validatePassword = (password) => {
-    return password.length >= 8;
-  };
+
 
   return (
     <div>
@@ -147,13 +139,16 @@ const Signup = () => {
         <br />
         <label>
           Password:
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
+          <input type="password" name="password" value={formData.password} onChange={handleChange}
+            required
+            minLength={8} />
           {errors.password && <span className="error">{errors.password}</span>}
         </label>
         <br />
         <label>
           Repeat Password:
-          <input type="password" name="passwordRep" value={formData.passwordRep} onChange={handleChange} />
+          <input type="password" name="passwordRep" value={formData.passwordRep} onChange={handleChange} required
+            minLength={8} />
           {errors.passwordRep && <span className="error">{errors.passwordRep}</span>}
         </label>
         <br />

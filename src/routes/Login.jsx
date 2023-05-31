@@ -31,7 +31,8 @@ const Login = () => {
                 // Manejar la respuesta del servidor
                 if (response.ok) {
                     console.log('Login successful');
-                    localStorage.setItem("token", jsonData.token)
+                    sessionStorage.setItem("token", jsonData.token)
+                    sessionStorage.setItem("user", JSON.stringify(jsonData.user))
                     window.location.href = '/'
 
                 } else {
