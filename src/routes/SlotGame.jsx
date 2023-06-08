@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, ReactDOM } from "react";
 import "./SlotGame.css";
 
 const SlotGame = () => {
@@ -6,16 +6,19 @@ const SlotGame = () => {
   const valor = [1, 2, 3, 4, 5, 10, 20, 50];
   const doorRefs = [useRef(null), useRef(null), useRef(null)];
 
-  const [credito, setCredito] = useState(Number(10));
+  const [credito, setCredito] = useState(Number(100));
+  const [mensaje, setMensaje] = useState("");
   const [apuesta, setApuesta] = useState(Number(0));
-  let resultado = ["❓", "❓", "❓"];
+  const [resultado, setResultado] = useState(["❓", "❓", "❓"]);
   const [resultadoFinal, setResultadoFinal] = useState(["❓", "❓", "❓"]);
 
   let doors = document.querySelectorAll(".door");
   let columnNumber = null;
 
   const handleChange = (event) => {
-    setApuesta(event.target.value);
+    console.log(event.target.value);
+    if (Number(event.target.value) < 0) setApuesta(0);
+    else setApuesta(event.target.value);
   };
 
   const handleClick = (column) => {
@@ -39,8 +42,11 @@ const SlotGame = () => {
         }
       );
       const data = await response.json();
-      resultado = data.resultado;
-      console.log(resultado);
+      if (data.mensaje !== "") setMensaje(data.mensaje);
+      else {
+        resultado = data.resultado;
+        console.log(resultado);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -56,48 +62,91 @@ const SlotGame = () => {
         body: JSON.stringify({ apuesta }),
       });
       const data = await response.json();
-      console.log("JSON resultado: " + data.resultado);
-      resultado = data.resultado;
-      setResultadoFinal(data.total);
-      setCredito(data.creditos);
-      console.log("LOCAL reslutado: " + resultado);
-      console.log(resultadoFinal);
+      if (data.message !== "" && !data.resultado) {
+        document.getElementById("message").style.display = "block";
+        setMensaje(data.message);
+      } else if (data.message !== "" && data.resultado) {
+        document.getElementById("message").style.display = "block";
+        setMensaje(data.message);
+        console.log("JSON resultado: " + data.resultado);
+        setResultado(data.resultado);
+        setResultadoFinal(data.total);
+        setCredito(data.creditos);
+        console.log("LOCAL reslutado: " + resultado);
+        init(false, 3, 4);
+      } else {
+        document.getElementById("message").style.display = "none";
+        console.log("JSON resultado: " + data.resultado);
+        setResultado(data.resultado);
+        setResultadoFinal(data.total);
+        setCredito(data.creditos);
+        console.log("LOCAL reslutado: " + resultado);
+        init(false, 3, 4);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const init = async () => {
-    doors = document.querySelectorAll(".door");
+  const init = async (firstInit = true, groups = 1, duration = 1) => {
+    if (firstInit) {
+      doors = document.querySelectorAll(".door");
+      setCredito(100);
+    }
+    doors = [...document.querySelectorAll(".door")]; // Convertir NodeList a array
     doors.map((door, index) => {
       const boxes = door.querySelector(".boxes");
       const boxesClone = boxes.cloneNode(false);
-      boxesClone.addEventListener(
-        "transitionstart",
-        function () {
-          door.dataset.spinned = "1";
-          this.querySelectorAll(".box").forEach((box) => {
-            box.style.filter = "blur(1px)";
-          });
-        },
-        { once: true }
-      );
-      boxesClone.addEventListener(
-        "transitionend",
-        function () {
-          this.querySelectorAll(".box").forEach((box, index) => {
-            box.style.filter = "blur(0)";
-            if (index > 0) this.removeChild(box);
-          });
-          // door.replaceChild(boxesClone, boxes);
-        },
-        { once: true }
-      );
-      console.log(resultadoFinal);
-    })
+      if (!firstInit) {
+        boxesClone.addEventListener(
+          "transitionstart",
+          function () {
+            door.dataset.spinned = "1";
+            this.querySelectorAll(".box").forEach((box) => {
+              box.style.filter = "blur(1px)";
+            });
+          },
+          { once: true }
+        );
+        boxesClone.addEventListener(
+          "transitionend",
+          function () {
+            this.querySelectorAll(".box").forEach((box, index) => {
+              box.style.filter = "blur(0)";
+              if (index > 0) this.removeChild(box);
+            });
+            // door.replaceChild(boxesClone, boxes);
+          },
+          { once: true }
+        );
+      }
+      console.log("HOLA: " + resultado[index]);
+      const pool = resultado[index];
 
-    
-  }
+      /*       for (let i = pool.length - 1; i >= 0; i--) {
+        const box = (
+          <div
+            className="box"
+            style={{
+              width: `${door.clientWidth}px`,
+              height: `${door.clientHeight}px`,
+            }}
+          >
+            {pool[i]}
+          </div>
+        );
+      } */
+    });
+  };
+
+  useEffect(() => {
+    //init();
+    console.log("1: " + resultadoFinal[0]);
+    console.log("2: " + resultadoFinal[1]);
+    console.log("3: " + resultadoFinal[2]);
+    //document.getElementById("message").style.display = "none";
+    //console.log(resultado);
+  }, [resultadoFinal]);
 
   return (
     <div>
@@ -138,13 +187,13 @@ const SlotGame = () => {
           </div>
         </div>
         <div>
-          <button className="spins" id="spinColumn1" onClick={() => spin()}>
+          <button className="spins" id="spinColumn1" onClick={() => spin()} style={{display: 'none'}}>
             Spin
           </button>
-          <button className="spins" id="spinColumn2" onClick={() => spin()}>
+          <button className="spins" id="spinColumn2" onClick={() => spin()} style={{display: 'none'}}>
             Spin
           </button>
-          <button className="spins" id="spinColumn3" onClick={() => spin()}>
+          <button className="spins" id="spinColumn3" onClick={() => spin()} style={{display: 'none'}}>
             Spin
           </button>
         </div>
@@ -152,6 +201,9 @@ const SlotGame = () => {
           <button id="spinner" onClick={() => spin()}>
             Spin All
           </button>
+        </div>
+        <div id="message" className="message" style={{display: 'none'}}>
+          <span>{mensaje}</span>
         </div>
 
         <div>

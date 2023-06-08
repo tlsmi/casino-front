@@ -124,3 +124,15 @@ button {
   border-radius: 15px;
   border: dotted;
 }
+
+.message{
+  color: yellow;
+  background-color: rgb(4, 85, 4);
+  font-size: 25pt;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 7%;
+  width: 60%;
+  border-radius: 15px;
+  border: dotted;
+  text-align: center;
+}
