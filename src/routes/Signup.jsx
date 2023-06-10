@@ -81,6 +81,13 @@ const Signup = () => {
       newErrors.email = '';
     }
 
+    // Validar la fecha de nacimiento
+    if (!validateBirthDate(formData.birthDate)) {
+      newErrors.birthDate = 'La fecha de nacimiento debe seguir el formato "yyyy-mm-dd" y el usuario debe ser mayor de 18 años.';
+      valid = false;
+    } else {
+      newErrors.birthDate = '';
+    }
 
 
     // Validar la repetición de la contraseña
@@ -105,7 +112,17 @@ const Signup = () => {
     return emailRegex.test(email);
   };
 
+  const validateBirthDate = (birthDate) => {
+    const birthDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    const today = new Date();
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const selectedDate = new Date(birthDate);
 
+    if (!birthDateRegex.test(birthDate) || selectedDate > eighteenYearsAgo) {
+      return false;
+    }
+    return true;
+  };
 
   return (
     <div>
@@ -135,6 +152,7 @@ const Signup = () => {
         <label>
           Birth Date:
           <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} />
+          {errors.birthDate && <span className="error">{errors.birthDate}</span>}
         </label>
         <br />
         <label>
