@@ -4,21 +4,21 @@ import fichas from "./img/fichas.webp"
 import bola from "./img/bola.webp"
 import "./roulette.css"
 import anime from 'animejs/lib/anime.es'
+import swal from "sweetalert"
+import React, { useState } from 'react';
 
 const Roulette = () => {
-
+    const [saldo, setSaldo] = useState(0);
     let auxBola = 0;
     let auxRuleta = 0;
     const gradosPorNum = 360 / 37;
     const numerosRuleta = [
-        0, 32, 16, 19, 4, 21, 2, 25,
-        17, 27, 6, 34, 13, 36, 11,
-        30, 8, 23, 10, 5, 24, 15, 33,
-        1, 20, 14, 31, 9, 22, 18, 29,
-        7, 28, 12, 35, 3, 26
+        0, 31, 16, 20, 3, 22, 1, 26,
+        18, 28, 5, 33, 14, 35, 12,
+        29, 7, 24, 9, 6, 25, 15, 34,
+        2, 19, 13, 32, 10, 21, 17, 30,
+        8, 27, 11, 36, 4, 25
     ];
-
-    let totalBet = 0;
     let squareArray = Array(49).fill(0);
     let coinValue = 1;
     let filaTable = 0;
@@ -30,7 +30,7 @@ const Roulette = () => {
     let playing = false;
 
     function getPos(e) {
-        console.log('apuesta =>'+playing)
+        console.log(playing)
         if (!playing) {
             // Info sobre tamaños del div que contiene la tabla
             const tabla = document.getElementById('table').getBoundingClientRect();
@@ -82,17 +82,8 @@ const Roulette = () => {
 
     }
 
-    function limpiar() {
-        totalBet = 0;
-        squareArray = Array(49);
-        coinValue = 1;
-        filaTable = 0;
-        columnaTable = 0;
-
-
-        fila = 0;
-        columna = 0;
-        typeCoin = 0;
+    function limpiarApuesta() {
+        squareArray = Array(49).fill(0);
     }
 
     function selectSquare(col, row) {
@@ -163,52 +154,122 @@ const Roulette = () => {
 
     function saveBet(pos, bet) {
         squareArray[pos] += bet;
-        totalBet += bet;
     }
 
-    function play() {
-        console.log('antes del play =>'+playing)
-        if (!playing) {
-            playing = true;
-            let num = Math.floor(Math.random() * 36);
-            console.log(num)
-    
-    
-            let rand = Math.floor(Math.random() * 360);
-            document.getElementById('ruletaImg').style.transform = 'rotate(' + auxRuleta + 'deg)';
-            document.getElementById('bola').style.transform = 'rotate(' + auxBola + 'deg)';
-    
-            // Rotar ruleta
-            setTimeout(() => {
-                console.log('durante del play =>'+playing)
-                playing = false;
-                console.log('despues del play =>'+playing)
-            }, 7200);
-        
-            anime({
-                targets: '.ruletaImg',
-                rotate: {
-                    value: -720 - 360 - rand,
-                    duration: 7000,
-                    easing: 'linear',
-                }
-            });
-    
-    
-    
-            // Rotar bola
-            anime({
-                targets: '.bola',
-                rotate: {
-                    value: 720 + 360 + numerosRuleta.indexOf(num) * gradosPorNum - rand,
-                    duration: 7000,
-                    easing: 'linear',
-                }
-            });
+    function getFormattedBet() {
+        let bet = {
+            total: 0,
+            par: [],
+            color: [],
+            mitad: [],
+            docena: [],
+            columna: [],
+            number: []
+        };
+        let total = 0;
+        for (let i = 0; i < squareArray.length; i++) {
+            if (i < 37 && squareArray[i] != 0) {
+                bet.number.push([i, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i < 40 && squareArray[i] != 0) {
+                bet.columna.push([i - 36, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i < 43 && squareArray[i] != 0) {
+                bet.docena.push([i - 39, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 43 && squareArray[i] != 0) {
+                bet.mitad.push([1, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 44 && squareArray[i] != 0) {
+                bet.par.push([true, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 45 && squareArray[i] != 0) {
+                bet.color.push(["rojo", squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 46 && squareArray[i] != 0) {
+                bet.color.push(["negro", squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 47 && squareArray[i] != 0) {
+                bet.par.push([false, squareArray[i]]);
+                total += squareArray[i];
+            } else if (i == 48 && squareArray[i] != 0) {
+                bet.mitad.push([2, squareArray[i]]);
+                total += squareArray[i];
+            }
 
-            auxRuleta = rand;
-            auxBola = numerosRuleta.indexOf(num) * gradosPorNum - rand;
-        
+        }
+        bet.total = total;
+        return bet;
+    }
+
+    async function play() {
+        if (!playing) {
+            setSaldo(100)
+            playing = true;
+            let bet = getFormattedBet();
+            const response = await fetch("http://localhost:8080/games/roulette", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                },
+                body: JSON.stringify(getFormattedBet())
+            });
+            const result = await response.json();
+            console.log(result);
+
+            if (result.message != "ok") {
+
+                swal({
+                    text: result.message,
+                    icon: 'error',
+                    background: '#14A200'
+                });
+                playing = false;
+
+            } else {
+
+                let num = result.n;
+                console.log(result);
+
+
+                let rand = Math.floor(Math.random() * 360);
+                document.getElementById('ruletaImg').style.transform = 'rotate(' + auxRuleta + 'deg)';
+                document.getElementById('bola').style.transform = 'rotate(' + auxBola + 'deg)';
+
+                // Rotar ruleta
+                setTimeout(() => {
+                    playing = false;
+                }, 7200);
+
+                anime({
+                    targets: '.ruletaImg',
+                    rotate: {
+                        value: -720 - 360 - rand,
+                        duration: 7000,
+                        easing: 'linear',
+                    }
+                });
+
+
+
+                // Rotar bola
+                anime({
+                    targets: '.bola',
+                    rotate: {
+                        value: 720 + 360 + numerosRuleta.indexOf(num) * gradosPorNum - rand,
+                        duration: 7000,
+                        easing: 'linear',
+                    }
+                });
+
+                auxRuleta = 360 - rand;
+                auxBola = numerosRuleta.indexOf(num) * gradosPorNum - rand;
+                console.log(squareArray);
+                limpiarApuesta();
+                console.log(squareArray);
+
+            }
         }
     }
 
@@ -223,6 +284,10 @@ const Roulette = () => {
                 </div>
             </div>
             <div className="table" id="table" onMouseDown={getPos}>
+                <div className="saldo">
+                    <label htmlFor="saldo">Saldo disponible  </label>
+                    <input type="number" id="saldo" disabled value={saldo}/>
+                </div>
                 <img src={fichas} className="fichas" />
                 <img src={tablaImg} className="tabla" />
             </div>
