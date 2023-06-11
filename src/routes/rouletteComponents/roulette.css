@@ -55,13 +55,15 @@
     text-align: center;
     font-family: 'casino';
     color: yellow;
+    margin-top: 10px;
+    margin-right: 2%;
 }
 
 .saldo {
     text-align: right;
     font-family: 'casino';
-    padding: 2%;
     color: yellow;
+    height: 40px;
 }
 
 .table {

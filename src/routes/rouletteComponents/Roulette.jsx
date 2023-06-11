@@ -5,7 +5,7 @@ import bola from "./img/bola.webp"
 import "./roulette.css"
 import anime from 'animejs/lib/anime.es'
 import swal from "sweetalert"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Roulette = () => {
     const [saldo, setSaldo] = useState(0);
@@ -29,6 +29,27 @@ const Roulette = () => {
     let typeCoin = 0;
     let playing = false;
 
+    useEffect(() => {
+        getSaldo()
+    });
+
+    const getSaldo = async () => {
+        try {
+          const response = await fetch('http://localhost:8080/credito', {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + sessionStorage.getItem("token"),
+            }
+          });
+          const data = await response.json();
+          console.log(data)
+          setSaldo(data.credito);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    };
+
     function getPos(e) {
         console.log(playing)
         if (!playing) {
@@ -45,10 +66,11 @@ const Roulette = () => {
             const tamanoFicha = widthTabla * 0.6 / 6;
 
             // Posiciones de los bordes horizontales y verticales necesarios de las fichas
-            const inicioHeightTabla = heightTabla * 0.5 + 95;
+            const inicioHeightTabla = heightTabla * 0.5 + 95 + 40;
             const inicioWidthTabla = widthVentana * 0.4;
             const widthSquare = widthTabla / 14;
-            const heightSquare = heightTabla * 0.5 / 5;
+            const heightSquare = document.getElementById('tabla').getBoundingClientRect().height/ 5;
+            console.log(heightSquare)
 
             // posicion del raton dentro de la ventana
             let x = e.clientX;
@@ -87,6 +109,8 @@ const Roulette = () => {
     }
 
     function selectSquare(col, row) {
+        console.log("col"+col);
+        console.log("row"+row);
         for (let i = 0; i < 14; i++) {
             for (let j = 0; j < 5; j++) {
                 if (i === col && j === row) {
@@ -150,6 +174,7 @@ const Roulette = () => {
             case 5:
                 coinValue = 100;
         }
+        console.log("coinValue :" + coinValue);
     }
 
     function saveBet(pos, bet) {
@@ -204,7 +229,6 @@ const Roulette = () => {
 
     async function play() {
         if (!playing) {
-            setSaldo(100)
             playing = true;
             let bet = getFormattedBet();
             const response = await fetch("http://localhost:8080/games/roulette", {
@@ -230,8 +254,6 @@ const Roulette = () => {
             } else {
 
                 let num = result.n;
-                console.log(result);
-
 
                 let rand = Math.floor(Math.random() * 360);
                 document.getElementById('ruletaImg').style.transform = 'rotate(' + auxRuleta + 'deg)';
@@ -263,6 +285,7 @@ const Roulette = () => {
                     }
                 });
 
+                //reseteamos la posicion de la bola y la ruleta para no tener que volver a la posicion inicial
                 auxRuleta = 360 - rand;
                 auxBola = numerosRuleta.indexOf(num) * gradosPorNum - rand;
                 console.log(squareArray);
@@ -284,12 +307,12 @@ const Roulette = () => {
                 </div>
             </div>
             <div className="table" id="table" onMouseDown={getPos}>
-                <div className="saldo">
+                <div className="saldo" id="saldoContainer">
                     <label htmlFor="saldo">Saldo disponible  </label>
                     <input type="number" id="saldo" disabled value={saldo}/>
                 </div>
                 <img src={fichas} className="fichas" />
-                <img src={tablaImg} className="tabla" />
+                <img src={tablaImg} className="tabla" id="tabla"/>
             </div>
 
         </div>
