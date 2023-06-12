@@ -2,6 +2,12 @@ import tablaImg from "./img/tabla.webp"
 import ruleta from "./img/ruleta.webp"
 import fichas from "./img/fichas.webp"
 import bola from "./img/bola.webp"
+import ficha1 from "./img/ficha1.webp"
+import ficha5 from "./img/ficha5.webp"
+import ficha10 from "./img/ficha10.webp"
+import ficha25 from "./img/ficha25.webp"
+import ficha50 from "./img/ficha50.webp"
+import ficha100 from "./img/ficha100.webp"
 import "./roulette.css"
 import anime from 'animejs/lib/anime.es'
 import swal from "sweetalert"
@@ -11,6 +17,7 @@ const Roulette = () => {
     const [saldo, setSaldo] = useState(0);
     let auxBola = 0;
     let auxRuleta = 0;
+    let positioned = false;
     const gradosPorNum = 360 / 37;
     const numerosRuleta = [
         0, 31, 16, 20, 3, 22, 1, 26,
@@ -19,6 +26,8 @@ const Roulette = () => {
         2, 19, 13, 32, 10, 21, 17, 30,
         8, 27, 11, 36, 4, 25
     ];
+
+    let cont = 0;
     let squareArray = Array(49).fill(0);
     let coinValue = 1;
     let filaTable = 0;
@@ -35,23 +44,33 @@ const Roulette = () => {
 
     const getSaldo = async () => {
         try {
-          const response = await fetch('http://localhost:8080/credito', {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer " + sessionStorage.getItem("token"),
-            }
-          });
-          const data = await response.json();
-          console.log(data)
-          setSaldo(data.credito);
+            const response = await fetch('http://localhost:8080/credito', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                }
+            });
+            const data = await response.json();
+            setSaldo(data.credito);
         } catch (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
         }
-    };
+    }
 
+    function posicionarFichas(inicioHeightTabla,inicioWidthTabla,heightSquare) {
+        for (let i = 0; i < 49; i++) {
+            if (i === 0) {
+                console.log(typeCoin)
+                document.getElementById(i).style.top = inicioHeightTabla + heightSquare;
+                document.getElementById(i).getElementsByTagName("img")[typeCoin].style.display = 'block';
+                
+            }
+        }
+    }
+
+    // detecta la posicion del click
     function getPos(e) {
-        console.log(playing)
         if (!playing) {
             // Info sobre tamaños del div que contiene la tabla
             const tabla = document.getElementById('table').getBoundingClientRect();
@@ -65,31 +84,35 @@ const Roulette = () => {
             const inicioHeightFichas = heightTabla * 0.35 + 95;
             const tamanoFicha = widthTabla * 0.6 / 6;
 
-            // Posiciones de los bordes horizontales y verticales necesarios de las fichas
-            const inicioHeightTabla = heightTabla * 0.5 + 95 + 40;
-            const inicioWidthTabla = widthVentana * 0.4;
-            const widthSquare = widthTabla / 14;
-            const heightSquare = document.getElementById('tabla').getBoundingClientRect().height/ 5;
-            console.log(heightSquare)
-
+           
+            // Posiciones de los bordes horizontales y verticales necesarios de la tabla
+            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + 96 + document.getElementById('saldoContainer').getBoundingClientRect().height;
+            const inicioWidthTabla =  document.getElementById('ruleta').getBoundingClientRect().width +  document.getElementById('table').getBoundingClientRect().width*0.1;
+            const inicioWidthNums =  document.getElementById('ruleta').getBoundingClientRect().width +  document.getElementById('table').getBoundingClientRect().width*0.1 + document.getElementById('tabla').getBoundingClientRect().width*0.104;
+            const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width*0.104) / 13;
+            const heightSquare = document.getElementById('tabla').getBoundingClientRect().height / 5;
             // posicion del raton dentro de la ventana
             let x = e.clientX;
             let y = e.clientY;
 
-            if (y > inicioHeightTabla) {
-                for (let i = 0; i < 6; i++) {
-                    if (y > (inicioHeightTabla + heightSquare * i)) {
-                        filaTable = i;
+            if (y > inicioHeightTabla && x > inicioWidthTabla) {
+                    for (let i = 0; i < 6; i++) {
+                        if (y > (inicioHeightTabla + heightSquare * i)) {
+                            filaTable = i;
+                        }
                     }
-                }
-                for (let i = 0; i < 15; i++) {
-                    if (x > (inicioWidthTabla + widthSquare * i)) {
-                        columna = i;
-                        columnaTable = columna;
+                    for (let i = 0; i < 14; i++) {
+                        if (x < inicioWidthNums) {
+                            
+                            columnaTable = 0;
+                            break;
+                        }
+                        if (x > (inicioWidthNums + widthSquare * i)) {
+                            columna = i+1;
+                            columnaTable = columna;
+                        }
                     }
-                }
-                selectSquare(columnaTable, filaTable)
-
+                    selectSquare(columnaTable, filaTable)
             } else {
                 if (y > (inicioHeightFichas) && x > (inicioWidthFichas) && x < (finWidthFichas)) {
                     for (let i = 0; i < 6; i++) {
@@ -109,8 +132,6 @@ const Roulette = () => {
     }
 
     function selectSquare(col, row) {
-        console.log("col"+col);
-        console.log("row"+row);
         for (let i = 0; i < 14; i++) {
             for (let j = 0; j < 5; j++) {
                 if (i === col && j === row) {
@@ -237,10 +258,9 @@ const Roulette = () => {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
-                body: JSON.stringify(getFormattedBet())
+                body: JSON.stringify(bet)
             });
             const result = await response.json();
-            console.log(result);
 
             if (result.message != "ok") {
 
@@ -288,9 +308,7 @@ const Roulette = () => {
                 //reseteamos la posicion de la bola y la ruleta para no tener que volver a la posicion inicial
                 auxRuleta = 360 - rand;
                 auxBola = numerosRuleta.indexOf(num) * gradosPorNum - rand;
-                console.log(squareArray);
                 limpiarApuesta();
-                console.log(squareArray);
 
             }
         }
@@ -299,7 +317,6 @@ const Roulette = () => {
     return (
         <div className="container" >
             <div className="ruleta" id="ruleta">
-
                 <img src={bola} className="bola" id="bola" />
                 <img src={ruleta} className="ruletaImg" id="ruletaImg" />
                 <div className="boton">
@@ -309,10 +326,26 @@ const Roulette = () => {
             <div className="table" id="table" onMouseDown={getPos}>
                 <div className="saldo" id="saldoContainer">
                     <label htmlFor="saldo">Saldo disponible  </label>
-                    <input type="number" id="saldo" disabled value={saldo}/>
+                    <input type="number" id="saldo" disabled value={saldo} />
                 </div>
-                <img src={fichas} className="fichas" />
-                <img src={tablaImg} className="tabla" id="tabla"/>
+                <div className="fichasContainer" id="fichasContainer">
+                    <img src={fichas} className="fichas" id="fichas" />
+                </div>
+                <div className="fichasColocadas">
+                    {
+                        squareArray.map( (value,index)  => 
+                        <div className="fichaIndiv" id={index}>
+                            <img src={ficha1} alt=" " id="ficha1" style={{position:'absolute'}} />
+                            <img src={ficha5} alt=" " id="ficha5"  style={{position:'absolute'}}/>
+                            <img src={ficha10} alt=" " id="ficha10"  style={{position:'absolute'}}/>
+                            <img src={ficha25} alt=" " id="ficha25"  style={{position:'absolute'}}/>
+                            <img src={ficha50} alt=" " id="ficha50"  style={{position:'absolute'}}/>
+                            <img src={ficha100} alt=" " id="ficha100"  />
+                        </div>)
+                    }
+                </div>
+                <img src={tablaImg} className="tabla" id="tabla" />
+                
             </div>
 
         </div>
