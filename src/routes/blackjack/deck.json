@@ -1,0 +1,212 @@
+{
+  "cards": [
+    {
+      "value": "A",
+      "suit": "PICAS"
+    },
+    {
+      "value": "A",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "A",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "A",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "2",
+      "suit": "PICAS"
+    },
+    {
+      "value": "2",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "2",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "2",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "3",
+      "suit": "PICAS"
+    },
+    {
+      "value": "3",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "3",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "3",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "4",
+      "suit": "PICAS"
+    },
+    {
+      "value": "4",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "4",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "4",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "5",
+      "suit": "PICAS"
+    },
+    {
+      "value": "5",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "5",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "5",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "6",
+      "suit": "PICAS"
+    },
+    {
+      "value": "6",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "6",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "6",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "7",
+      "suit": "PICAS"
+    },
+    {
+      "value": "7",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "7",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "7",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "8",
+      "suit": "PICAS"
+    },
+    {
+      "value": "8",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "8",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "8",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "9",
+      "suit": "PICAS"
+    },
+    {
+      "value": "9",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "9",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "9",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "10",
+      "suit": "PICAS"
+    },
+    {
+      "value": "10",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "10",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "10",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "J",
+      "suit": "PICAS"
+    },
+    {
+      "value": "J",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "J",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "J",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "Q",
+      "suit": "PICAS"
+    },
+    {
+      "value": "Q",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "Q",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "Q",
+      "suit": "CORAZONES"
+    },
+    {
+      "value": "K",
+      "suit": "PICAS"
+    },
+    {
+      "value": "K",
+      "suit": "DIAMANTES"
+    },
+    {
+      "value": "K",
+      "suit": "TREBOLES"
+    },
+    {
+      "value": "K",
+      "suit": "CORAZONES"
+    }
+  ]
+}
