@@ -98,14 +98,14 @@ const Roulette = () => {
             }
             if (squareArray[i] !== 0) {
                 for (let k = 0; k < 4; k++) {
-                    if (Math.pow(10,k) <= squareArray[i]) {
+                    if (Math.pow(10, k) <= squareArray[i]) {
                         document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
                         document.getElementById("span " + i).style.top = document.getElementById(i).getBoundingClientRect().width * 0.2 + "px"
                         document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.3 - 0.05 * k) + "px"
-                        document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width*(0.5 -0.07 * k) + "px"
+                        document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width * (0.5 - 0.07 * k) + "px"
                         document.getElementById("span " + i).innerHTML = squareArray[i];
                     }
-                    
+
                 }
             }
         }
@@ -317,29 +317,25 @@ const Roulette = () => {
 
     async function play() {
         console.log(playing)
-        if (!playing) {
-            playing = true;
-            let bet = getFormattedBet();
-            const response = await fetch("http://localhost:8080/games/roulette", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
-                },
-                body: JSON.stringify(bet)
+        let bet = getFormattedBet();
+        if (bet.total === 0) {
+            swal({
+                text: "No has apostado nada",
+                icon: 'error',
             });
-            const result = await response.json();
+        } else {
+            if (!playing) {
+                playing = true;
 
-            if (result.message != "ok") {
-
-                swal({
-                    text: result.message,
-                    icon: 'error',
-                    background: '#14A200'
+                const response = await fetch("http://localhost:8080/games/roulette", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                    },
+                    body: JSON.stringify(bet)
                 });
-                playing = false;
-
-            } else {
+                const result = await response.json();
 
                 let balance = result.balance;
                 let num = result.n;
@@ -390,6 +386,7 @@ const Roulette = () => {
         }
     }
 
+
     return (
         <div className="container" >
             <div className="ruleta" id="ruleta">
@@ -403,7 +400,9 @@ const Roulette = () => {
                 <div className="topTable" id="topTable">
                     <button className="reset" onClick={limpiarApuesta}>Reset Bet</button>
                     <label htmlFor="saldo" className="saldo">SALDO DISPONIBLE : </label>
-                    {saldo} {coinValue}
+                    {saldo} Coins
+                    <label htmlFor="coinValue" className="coinValue">FICHA SELECCIONADA : </label>
+                    {coinValue}
                 </div>
                 <div className="fichasContainer" id="fichasContainer">
                     <img src={fichas} className="fichas" id="fichas" />
@@ -429,8 +428,6 @@ const Roulette = () => {
 
         </div>
     );
-
-
 }
 
 export default Roulette;

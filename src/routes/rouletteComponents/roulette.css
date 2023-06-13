@@ -39,7 +39,11 @@ html{
 
 span{
     font-weight: bold;
-    color: blue;
+    color: white;
+}
+
+.coinValue{
+    margin-left: 5%;
 }
 
 .fichaIndiv{
