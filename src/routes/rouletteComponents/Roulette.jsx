@@ -2,12 +2,12 @@ import tablaImg from "./img/tabla.webp"
 import ruleta from "./img/ruleta.webp"
 import fichas from "./img/fichas.webp"
 import bola from "./img/bola.webp"
-import ficha1 from "./img/ficha1.webp"
-import ficha5 from "./img/ficha5.webp"
-import ficha10 from "./img/ficha10.webp"
-import ficha25 from "./img/ficha25.webp"
-import ficha50 from "./img/ficha50.webp"
-import ficha100 from "./img/ficha100.webp"
+import ficha1Vacia from "./img/ficha1Vacia.webp"
+import ficha5Vacia from "./img/ficha5Vacia.webp"
+import ficha10Vacia from "./img/ficha10Vacia.webp"
+import ficha25Vacia from "./img/ficha25Vacia.webp"
+import ficha50Vacia from "./img/ficha50Vacia.webp"
+import ficha100Vacia from "./img/ficha100Vacia.webp"
 import "./roulette.css"
 import anime from 'animejs/lib/anime.es'
 import swal from "sweetalert"
@@ -15,34 +15,34 @@ import React, { useEffect, useState } from 'react';
 
 const Roulette = () => {
     const [saldo, setSaldo] = useState(0);
-    let auxBola = 0;
-    let auxRuleta = 0;
+    const [coinValue, setCoinValue] = useState(1);
+    const [saldoInicial, setSaldoInicial] = useState(0);
+    const [squareArray, setSquareArray] = useState(Array(49).fill(0));
+    const [auxBola, setAuxBola] = useState(0);
+    const [auxRuleta, setAuxRuleta] = useState(0);
     let positioned = false;
     const gradosPorNum = 360 / 37;
     const numerosRuleta = [
         0, 31, 16, 20, 3, 22, 1, 26,
         18, 28, 5, 33, 14, 35, 12,
-        29, 7, 24, 9, 6, 25, 15, 34,
+        29, 7, 24, 9, 6, 23, 15, 34,
         2, 19, 13, 32, 10, 21, 17, 30,
         8, 27, 11, 36, 4, 25
     ];
 
     let cont = 0;
-    let squareArray = Array(49).fill(0);
-    let coinValue = 1;
     let filaTable = 0;
     let columnaTable = 0;
 
     let fila = 0;
     let columna = 0;
-    let typeCoin = 0;
     let playing = false;
 
-    useEffect(() => {
-        getSaldo()
-    });
+    window.onload = function () {
+        getSaldo();
+    }
 
-    const getSaldo = async () => {
+    async function getSaldo() {
         try {
             const response = await fetch('http://localhost:8080/credito', {
                 method: "GET",
@@ -53,18 +53,60 @@ const Roulette = () => {
             });
             const data = await response.json();
             setSaldo(data.credito);
+            setSaldoInicial(data.credito);
         } catch (error) {
             console.error('Error:', error);
         }
     }
 
-    function posicionarFichas(inicioHeightTabla,inicioWidthTabla,heightSquare) {
+    function selectTypeCoin(num) {
+        if (num < 5) {
+            return 0;
+        } else if (num < 10) {
+            return 1;
+        } else if (num < 25) {
+            return 2;
+        } else if (num < 50) {
+            return 3;
+        } else if (num < 100) {
+            return 4;
+        } else if (num >= 100) {
+            return 5;
+        }
+
+    }
+
+    function posicionarFichas(inicioHeightTabla, inicioWidthTabla, heightSquare, widthSquare) {
         for (let i = 0; i < 49; i++) {
             if (i === 0) {
-                console.log(typeCoin)
-                document.getElementById(i).style.top = inicioHeightTabla + heightSquare;
-                document.getElementById(i).getElementsByTagName("img")[typeCoin].style.display = 'block';
-                
+                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare + heightSquare * 0.25) + "px";
+                document.getElementById(i).style.left = (inicioWidthTabla + widthSquare * 0.4) + "px";
+            } else if (i > 39 && i < 43) {
+                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * 3 + heightSquare * 0.25) + "px";
+                document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * (1.5 + 4 * (i - 40))) + "px";
+            } else if (i > 42) {
+                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * 4 + heightSquare * 0.25) + "px";
+                document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * (0.5 + 2 * (i - 43))) + "px";
+            } else {
+                for (let j = 1; j < 4; j++) {
+                    if ((i - j) % 3 === 0) {
+                        document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * (3 - j) + heightSquare * 0.2) + "px";
+                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3)) + "px";
+
+                    }
+                }
+            }
+            if (squareArray[i] !== 0) {
+                for (let k = 0; k < 4; k++) {
+                    if (Math.pow(10,k) <= squareArray[i]) {
+                        document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
+                        document.getElementById("span " + i).style.top = document.getElementById(i).getBoundingClientRect().width * 0.2 + "px"
+                        document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.3 - 0.05 * k) + "px"
+                        document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width*(0.5 -0.07 * k) + "px"
+                        document.getElementById("span " + i).innerHTML = squareArray[i];
+                    }
+                    
+                }
             }
         }
     }
@@ -79,48 +121,49 @@ const Roulette = () => {
             const widthTabla = tabla.width;
 
             // Posiciones de los bordes horizontales y verticales necesarios de las fichas
-            const inicioWidthFichas = widthVentana * 0.4 + widthTabla * 0.2;
-            const finWidthFichas = widthVentana * 0.4 + widthTabla * 0.8;
-            const inicioHeightFichas = heightTabla * 0.35 + 95;
-            const tamanoFicha = widthTabla * 0.6 / 6;
+            const inicioWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.35;
+            const finWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.65;
+            const inicioHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height / 3;
+            const finHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
+            const tamanoFicha = widthTabla * 0.3 / 6;
 
-           
+
             // Posiciones de los bordes horizontales y verticales necesarios de la tabla
-            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + 96 + document.getElementById('saldoContainer').getBoundingClientRect().height;
-            const inicioWidthTabla =  document.getElementById('ruleta').getBoundingClientRect().width +  document.getElementById('table').getBoundingClientRect().width*0.1;
-            const inicioWidthNums =  document.getElementById('ruleta').getBoundingClientRect().width +  document.getElementById('table').getBoundingClientRect().width*0.1 + document.getElementById('tabla').getBoundingClientRect().width*0.104;
-            const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width*0.104) / 13;
+            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + 96 + document.getElementById('topTable').getBoundingClientRect().height;
+            const inicioWidthTabla = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1;
+            const inicioWidthNums = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1 + document.getElementById('tabla').getBoundingClientRect().width * 0.104;
+            const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width * 0.104) / 13;
             const heightSquare = document.getElementById('tabla').getBoundingClientRect().height / 5;
             // posicion del raton dentro de la ventana
             let x = e.clientX;
             let y = e.clientY;
 
             if (y > inicioHeightTabla && x > inicioWidthTabla) {
-                    for (let i = 0; i < 6; i++) {
-                        if (y > (inicioHeightTabla + heightSquare * i)) {
-                            filaTable = i;
-                        }
+                for (let i = 0; i < 6; i++) {
+                    if (y > (inicioHeightTabla + heightSquare * i)) {
+                        filaTable = i;
                     }
-                    for (let i = 0; i < 14; i++) {
-                        if (x < inicioWidthNums) {
-                            
-                            columnaTable = 0;
-                            break;
-                        }
-                        if (x > (inicioWidthNums + widthSquare * i)) {
-                            columna = i+1;
-                            columnaTable = columna;
-                        }
+                }
+                for (let i = 0; i < 14; i++) {
+                    if (x < inicioWidthNums) {
+
+                        columnaTable = 0;
+                        break;
                     }
-                    selectSquare(columnaTable, filaTable)
+                    if (x > (inicioWidthNums + widthSquare * i)) {
+                        columna = i + 1;
+                        columnaTable = columna;
+                    }
+                }
+                selectSquare(columnaTable, filaTable);
+                posicionarFichas(inicioHeightTabla, inicioWidthTabla, heightSquare, widthSquare);
             } else {
-                if (y > (inicioHeightFichas) && x > (inicioWidthFichas) && x < (finWidthFichas)) {
+                if (y > (inicioHeightFichas) && y < (finHeightFichas) && x > (inicioWidthFichas) && x < (finWidthFichas)) {
                     for (let i = 0; i < 6; i++) {
                         if (x > inicioWidthFichas + tamanoFicha * i) {
-                            typeCoin = i;
+                            selectCoin(i);
                         }
                     }
-                    selectCoin(typeCoin);
                 }
             }
         }
@@ -128,45 +171,70 @@ const Roulette = () => {
     }
 
     function limpiarApuesta() {
-        squareArray = Array(49).fill(0);
+
+        setSquareArray(Array(49).fill(0));
+        getSaldo();
+        for (let i = 0; i < 49; i++) {
+            document.getElementById("span " + i).innerHTML = "";
+            for (let j = 0; j < 6; j++) {
+                document.getElementById(i).getElementsByTagName("img")[j].style.display = 'none';
+            }
+        }
+
     }
 
     function selectSquare(col, row) {
-        for (let i = 0; i < 14; i++) {
-            for (let j = 0; j < 5; j++) {
-                if (i === col && j === row) {
+        if (saldo - coinValue < 0) {
+            swal("", "No tienes suficiente saldo en tu cuenta", 'error');
+        } else {
 
-                    if (!((i === 0 || i === 13) && (j === 3 || j === 4))) {
+            for (let i = 0; i < 14; i++) {
+                for (let j = 0; j < 5; j++) {
+                    if (i === col && j === row) {
+                        if (!((i === 0 || i === 13) && (j === 3 || j === 4))) {
+                            if (j < 3 && i < 13) {
+                                if (i === 0) {
+                                    saveBet(0, coinValue);
+                                    setSaldo(saldo - coinValue);
 
-                        if (j < 3 && i < 13) {
-                            if (i === 0) {
-                                saveBet(0, coinValue);
+                                } else {
+                                    saveBet(3 * i - j, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                }
+                            } else if (i === 13) {
+                                saveBet(3 - j + 36, coinValue);
+                                setSaldo(saldo - coinValue);
+                            } else if (j === 3) {
+                                if (i < 5) {
+                                    saveBet(40, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else if (i > 8) {
+                                    saveBet(42, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else {
+                                    saveBet(41, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                }
                             } else {
-                                saveBet(3 * i - j, coinValue);
-                            }
-                        } else if (i === 13) {
-                            saveBet(3 - j + 36, coinValue);
-                        } else if (j === 3) {
-                            if (i < 5) {
-                                saveBet(40, coinValue);
-                            } else if (i > 8) {
-                                saveBet(42, coinValue);
-                            } else {
-                                saveBet(41, coinValue);
-                            }
-                        } else {
-                            if (i < 3) {
-                                saveBet(43, coinValue);
-                            } else if (i < 5) {
-                                saveBet(44, coinValue);
-                            } else if (i < 7) {
-                                saveBet(45, coinValue);
-                            } else if (i < 9) {
-                                saveBet(46, coinValue);
-                            } else if (i < 11) {
-                                saveBet(47, coinValue);
-                            } else {
-                                saveBet(48, coinValue);
+                                if (i < 3) {
+                                    saveBet(43, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else if (i < 5) {
+                                    saveBet(44, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else if (i < 7) {
+                                    saveBet(45, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else if (i < 9) {
+                                    saveBet(46, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else if (i < 11) {
+                                    saveBet(47, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                } else {
+                                    saveBet(48, coinValue);
+                                    setSaldo(saldo - coinValue);
+                                }
                             }
                         }
                     }
@@ -178,24 +246,23 @@ const Roulette = () => {
     function selectCoin(typeCoin) {
         switch (typeCoin) {
             case 0:
-                coinValue = 1;
+                setCoinValue(1);
                 break;
             case 1:
-                coinValue = 5;
+                setCoinValue(5);
                 break;
             case 2:
-                coinValue = 10;
+                setCoinValue(10);
                 break;
             case 3:
-                coinValue = 25;
+                setCoinValue(25);
                 break;
             case 4:
-                coinValue = 50;
+                setCoinValue(50);
                 break;
             case 5:
-                coinValue = 100;
+                setCoinValue(100);
         }
-        console.log("coinValue :" + coinValue);
     }
 
     function saveBet(pos, bet) {
@@ -249,6 +316,7 @@ const Roulette = () => {
     }
 
     async function play() {
+        console.log(playing)
         if (!playing) {
             playing = true;
             let bet = getFormattedBet();
@@ -273,15 +341,23 @@ const Roulette = () => {
 
             } else {
 
+                let balance = result.balance;
                 let num = result.n;
-
                 let rand = Math.floor(Math.random() * 360);
+                console.log(auxRuleta);
+                console.log(auxBola);
+
                 document.getElementById('ruletaImg').style.transform = 'rotate(' + auxRuleta + 'deg)';
                 document.getElementById('bola').style.transform = 'rotate(' + auxBola + 'deg)';
 
                 // Rotar ruleta
                 setTimeout(() => {
                     playing = false;
+                    if (balance > 0) {
+                        swal("Has ganado " + balance + " coins", "", 'success');
+                    } else {
+                        swal("Has perdido " + balance + " coins", "", 'error');
+                    }
                 }, 7200);
 
                 anime({
@@ -306,9 +382,9 @@ const Roulette = () => {
                 });
 
                 //reseteamos la posicion de la bola y la ruleta para no tener que volver a la posicion inicial
-                auxRuleta = 360 - rand;
-                auxBola = numerosRuleta.indexOf(num) * gradosPorNum - rand;
-                limpiarApuesta();
+                setAuxRuleta(360 - rand);
+                setAuxBola(numerosRuleta.indexOf(num) * gradosPorNum - rand);
+                limpiarApuesta(balance);
 
             }
         }
@@ -324,28 +400,31 @@ const Roulette = () => {
                 </div>
             </div>
             <div className="table" id="table" onMouseDown={getPos}>
-                <div className="saldo" id="saldoContainer">
-                    <label htmlFor="saldo">Saldo disponible  </label>
-                    <input type="number" id="saldo" disabled value={saldo} />
+                <div className="topTable" id="topTable">
+                    <button className="reset" onClick={limpiarApuesta}>Reset Bet</button>
+                    <label htmlFor="saldo" className="saldo">SALDO DISPONIBLE : </label>
+                    {saldo} {coinValue}
                 </div>
                 <div className="fichasContainer" id="fichasContainer">
                     <img src={fichas} className="fichas" id="fichas" />
                 </div>
                 <div className="fichasColocadas">
                     {
-                        squareArray.map( (value,index)  => 
-                        <div className="fichaIndiv" id={index}>
-                            <img src={ficha1} alt=" " id="ficha1" style={{position:'absolute'}} />
-                            <img src={ficha5} alt=" " id="ficha5"  style={{position:'absolute'}}/>
-                            <img src={ficha10} alt=" " id="ficha10"  style={{position:'absolute'}}/>
-                            <img src={ficha25} alt=" " id="ficha25"  style={{position:'absolute'}}/>
-                            <img src={ficha50} alt=" " id="ficha50"  style={{position:'absolute'}}/>
-                            <img src={ficha100} alt=" " id="ficha100"  />
-                        </div>)
+                        squareArray.map((value, index) =>
+                            <div className="fichaIndiv" id={index} key={index}>
+
+                                <img src={ficha1Vacia} alt=" " id="ficha1" style={{ position: "absolute" }} />
+                                <img src={ficha5Vacia} alt=" " id="ficha5" style={{ position: "absolute" }} />
+                                <img src={ficha10Vacia} alt=" " id="ficha10" style={{ position: "absolute" }} />
+                                <img src={ficha25Vacia} alt=" " id="ficha25" style={{ position: "absolute" }} />
+                                <img src={ficha50Vacia} alt=" " id="ficha50" style={{ position: "absolute" }} />
+                                <img src={ficha100Vacia} alt=" " id="ficha100" />
+                                <span id={"span " + index} style={{ position: "absolute" }}></span>
+                            </div>)
                     }
                 </div>
                 <img src={tablaImg} className="tabla" id="tabla" />
-                
+
             </div>
 
         </div>

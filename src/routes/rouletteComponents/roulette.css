@@ -18,6 +18,30 @@ html{
     padding-left: 5%;
 }
 
+.topTable{
+    text-align: right;
+    font-weight: bold;
+    color: yellow;
+    margin-right: 2%;
+}
+
+
+.reset{
+    margin-top: 1%;
+    margin-right:30%;
+    color: yellow;
+    background-color: rgb(4, 85, 4);
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 15px;
+    border: dotted;
+}
+
+span{
+    font-weight: bold;
+    color: blue;
+}
+
 .fichaIndiv{
     position: absolute;
     width:3.5%;
@@ -107,9 +131,11 @@ html{
 
 .saldo {
     text-align: right;
-    font-family: 'casino';
+    font-weight: bold;
     color: yellow;
     height: 2%;
+    width: 50%;
+    margin-right: 0;
 }
 
 .table {
