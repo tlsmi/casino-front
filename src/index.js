@@ -10,7 +10,7 @@ import Root from "./routes/Root";
 import Homepage from "./routes/Homepage";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";
-import SlotGame from "./routes/SlotGame";
+import SlotGame from "./routes/slot/SlotGame";
 
 const router = createBrowserRouter([
   {
