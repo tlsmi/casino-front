@@ -48,10 +48,11 @@ const App: React.FC = () => {
     standDisabled: false,
     resetDisabled: true,
   });
+  const [game, setGame] = useState(false);
 
   useEffect(() => {
     getCredito();
-  });
+  }, []);
 
   // Definimos la función para la solicitud Fetch
   const getCredito = async () => {
@@ -60,7 +61,7 @@ const App: React.FC = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": sessionStorage.getItem("token") || "",
+          Authorization: sessionStorage.getItem("token") || "",
         },
       });
       const data = await response.json();
@@ -73,43 +74,93 @@ const App: React.FC = () => {
   useEffect(() => {
     if (gameState === GameState.INIT) {
       start();
-      drawCard(Deal.USER);
-      drawCard(Deal.HIDDEN);
-      drawCard(Deal.USER);
-      drawCard(Deal.DEALER);
-      setGameState(GameState.USER_TURN);
-      setMessage(Message.HIT_STAND);
-    }
-  }, [gameState]);
-
-   const start = async () => {
-    try { 
-      const response = await fetch("http://localhost:8082/games/blackjack1/start", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": sessionStorage.getItem("token") || "",
-        },
-        body: JSON.stringify({ apuesta: balance }),
-      });
-      const data = await response.json();
-      
-      setBalance(data.balance);
-
-      let userDeck = data.player.hand;
-      console.log(userDeck);
-      let dealerDeck = data.dealer.hand;
-      console.log(dealerDeck);
       //drawCard(Deal.USER);
-      //dealCard(Deal.USER, userDeck[0].rank, userDeck[0].palo);
       //drawCard(Deal.HIDDEN);
       //drawCard(Deal.USER);
       //drawCard(Deal.DEALER);
+      //setGameState(GameState.USER_TURN);
+      //setMessage(Message.HIT_STAND);
+    }
+  }, [gameState]);
 
+  const start = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8082/games/blackjack1/start",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionStorage.getItem("token") || "",
+          },
+          body: JSON.stringify({ apuesta: balance }),
+        }
+      );
+      setGame(true);
+      const data = await response.json();
+      setBalance(data.betAmount);
+
+      let userDeck = data.player.hand;
+      let dealerDeck = data.dealer.hand;
+
+      for (let i = 0; i < userDeck.length; i++) {
+        let palo = userDeck[i].palo;
+        let score = userDeck[i].rank;
+        if (palo !== null) palo = elegirPalo(palo);
+        if (score !== null) score = getValue(score);
+        dealCard(Deal.USER, score, palo);
+      }
+
+      for (let i = 0; i < dealerDeck.length; i++) {
+        let palo = dealerDeck[i].palo;
+        let score = dealerDeck[i].rank;
+        if (palo !== null) palo = elegirPalo(palo);
+        if (score !== null) score = getValue(score);
+        if (i === 0) dealCard(Deal.HIDDEN, score, palo);
+        else dealCard(Deal.DEALER, score, palo);
+      }
+
+      setGameState(GameState.USER_TURN);
+      setMessage(Message.HIT_STAND);
     } catch (err) {
       console.error("Error: " + err);
     }
-  }
+  };
+
+  const elegirPalo = (palo: string) => {
+    if (palo === "PICAS") return "♠";
+    else if (palo === "DIAMANTES") return "♦";
+    else if (palo === "TREBOLES") return "♣";
+    else if (palo === "CORAZONES") return "♥";
+    return null;
+  };
+
+  const getValue = (rank: string) => {
+    switch (rank) {
+      case "AS":
+        return "A";
+      case "DOS":
+        return "2";
+      case "TRES":
+        return "3";
+      case "CUATRO":
+        return "4";
+      case "CINCO":
+        return "5";
+      case "SEIS":
+        return "6";
+      case "SIETE":
+        return "7";
+      case "OCHO":
+        return "8";
+      case "NUEVE":
+        return "9";
+      case "DIEZ":
+        return "10";
+      default:
+        return rank;
+    }
+  };
 
   useEffect(() => {
     calculate(userCards, setUserScore);
@@ -137,10 +188,38 @@ const App: React.FC = () => {
       if (dealerScore >= 17) {
         checkWin();
       } else {
-        drawCard(Deal.DEALER);
+        getCardDealer();
+        //drawCard(Deal.DEALER);
       }
     }
   }, [dealerCount]);
+
+  const getCardDealer = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8082/games/blackjack1/stand",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionStorage.getItem("token") || "",
+          },
+        }
+      );
+      const data = await response.json();
+      let dealerDeck = data.hand;
+
+      for (let i = dealerDeck.length - 1, count = 0; count < 1; count++) {
+        let palo = dealerDeck[i].palo;
+        let score = dealerDeck[i].rank;
+        if (palo !== null) palo = elegirPalo(palo);
+        if (score !== null) score = getValue(score);
+        dealCard(Deal.DEALER, score, palo);
+      }
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  };
 
   const resetGame = () => {
     console.clear();
@@ -269,8 +348,32 @@ const App: React.FC = () => {
     setScore(total);
   };
 
-  const hit = () => {
-    drawCard(Deal.USER);
+  const hit = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8082/games/blackjack1/hit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionStorage.getItem("token") || "",
+          },
+        }
+      );
+      const data = await response.json();
+      let userDeck = data.hand;
+
+      for (let i = userDeck.length - 1, count = 0; count < 1; count++) {
+        let palo = userDeck[i].palo;
+        let score = userDeck[i].rank;
+        if (palo !== null) palo = elegirPalo(palo);
+        if (score !== null) score = getValue(score);
+        dealCard(Deal.USER, score, palo);
+      }
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+    //drawCard(Deal.USER);
   };
 
   const stand = () => {
@@ -292,6 +395,7 @@ const App: React.FC = () => {
 
   const checkWin = () => {
     if (userScore > dealerScore || dealerScore > 21) {
+      getCredito();
       setBalance(Math.round((balance + bet * 2) * 100) / 100);
       setMessage(Message.USER_WIN);
     } else if (dealerScore > userScore) {
