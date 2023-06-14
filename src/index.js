@@ -12,6 +12,7 @@ import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import Profile from './routes/Profile';
 import Password from './routes/Password';
+import App from './routes/blackjack/App'
 import SlotGame from "./routes/slot/SlotGame";
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/password",
         element: <Password />
+      },
+      {
+        path: "/games/blackjack",
+        element: <App />
       },
     ]
   },

@@ -15,6 +15,9 @@ export default function Root() {
             <Link to="/signup">Signup</Link>
           </li>
           <li>
+            <Link to="/games/blackjack">BlackJack</Link>
+          </li>
+          <li>
             <Link to="/games/slot">Slot</Link>
           </li>
         </ul>
