@@ -35,6 +35,9 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },{
+        path: "/games/slot",
+        element: <SlotGame />
       },
       {
         path: "/profile/password",
