@@ -57,7 +57,7 @@ const App: React.FC = () => {
   // Definimos la función para la solicitud Fetch
   const getCredito = async () => {
     try {
-      const response = await fetch("http://localhost:8082/credito", {
+      const response = await fetch("http://localhost:8080/credito", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const App: React.FC = () => {
   const start = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8082/games/blackjack1/start",
+        "http://localhost:8080/games/blackjack1/start",
         {
           method: "POST",
           headers: {
@@ -197,7 +197,7 @@ const App: React.FC = () => {
   const getCardDealer = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8082/games/blackjack1/stand",
+        "http://localhost:8080/games/blackjack1/stand",
         {
           method: "POST",
           headers: {
@@ -351,7 +351,7 @@ const App: React.FC = () => {
   const hit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8082/games/blackjack1/hit",
+        "http://localhost:8080/games/blackjack1/hit",
         {
           method: "POST",
           headers: {
