@@ -80,7 +80,7 @@ const Roulette = () => {
         for (let i = 0; i < 49; i++) {
             if (i === 0) {
                 document.getElementById(i).style.top = (inicioHeightTabla + heightSquare + heightSquare * 0.25) + "px";
-                document.getElementById(i).style.left = (inicioWidthTabla + widthSquare * 0.4) + "px";
+                document.getElementById(i).style.left = (inicioWidthTabla + widthSquare * 0.5) + "px";
             } else if (i > 39 && i < 43) {
                 document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * 3 + heightSquare * 0.25) + "px";
                 document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * (1.5 + 4 * (i - 40))) + "px";
@@ -91,7 +91,7 @@ const Roulette = () => {
                 for (let j = 1; j < 4; j++) {
                     if ((i - j) % 3 === 0) {
                         document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * (3 - j) + heightSquare * 0.2) + "px";
-                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3)) + "px";
+                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3)+0.1) + "px";
 
                     }
                 }
@@ -101,7 +101,7 @@ const Roulette = () => {
                     if (Math.pow(10, k) <= squareArray[i]) {
                         document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
                         document.getElementById("span " + i).style.top = document.getElementById(i).getBoundingClientRect().width * 0.2 + "px"
-                        document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.3 - 0.05 * k) + "px"
+                        document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.4 - 0.05 * k) + "px"
                         document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width * (0.5 - 0.07 * k) + "px"
                         document.getElementById("span " + i).innerHTML = squareArray[i];
                     }
@@ -117,12 +117,9 @@ const Roulette = () => {
             // Info sobre tamaños del div que contiene la tabla
             const tabla = document.getElementById('table').getBoundingClientRect();
             const widthVentana = window.innerWidth;
-            const heightTabla = tabla.height;
             const widthTabla = tabla.width;
 
             // Posiciones de los bordes horizontales y verticales necesarios de las fichas
-            const inicioWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.35;
-            const finWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.65;
             const inicioHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height / 3;
             const finHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
             const tamanoFicha = widthTabla * 0.3 / 6;
@@ -130,13 +127,30 @@ const Roulette = () => {
 
             // Posiciones de los bordes horizontales y verticales necesarios de la tabla
             const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + 96 + document.getElementById('topTable').getBoundingClientRect().height;
-            const inicioWidthTabla = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1;
-            const inicioWidthNums = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1 + document.getElementById('tabla').getBoundingClientRect().width * 0.104;
             const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width * 0.104) / 13;
             const heightSquare = document.getElementById('tabla').getBoundingClientRect().height / 5;
+
+
+            let finWidthFichas;
+            let inicioWidthFichas;
+            let inicioWidthTabla;
+            let inicioWidthNums;
+
             // posicion del raton dentro de la ventana
             let x = e.clientX;
             let y = e.clientY;
+
+            if (widthVentana > 800) {
+                finWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.65;
+                inicioWidthFichas = document.getElementById('ruleta').getBoundingClientRect().width + widthTabla * 0.35;
+                inicioWidthTabla = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1;
+                inicioWidthNums = document.getElementById('ruleta').getBoundingClientRect().width + document.getElementById('table').getBoundingClientRect().width * 0.1 + document.getElementById('tabla').getBoundingClientRect().width * 0.104;
+            } else {
+                finWidthFichas = widthTabla * 0.65;
+                inicioWidthFichas = widthTabla * 0.35;
+                inicioWidthTabla = document.getElementById('table').getBoundingClientRect().width * 0.1;
+                inicioWidthNums = document.getElementById('table').getBoundingClientRect().width * 0.1 + document.getElementById('tabla').getBoundingClientRect().width * 0.104;
+            }
 
             if (y > inicioHeightTabla && x > inicioWidthTabla) {
                 for (let i = 0; i < 6; i++) {
@@ -166,6 +180,7 @@ const Roulette = () => {
                     }
                 }
             }
+
         }
 
     }
@@ -390,39 +405,38 @@ const Roulette = () => {
     return (
         <div className="container" >
             <div className="ruleta" id="ruleta">
-                <img src={bola} className="bola" id="bola" />
-                <img src={ruleta} className="ruletaImg" id="ruletaImg" />
+                <img src={bola} className="bola" id="bola" alt="bola" />
+                <img src={ruleta} className="ruletaImg" id="ruletaImg" alt="ruleta" width="300px" height="300px"/>
                 <div className="boton">
-                    <button className="play" onClick={play}>PLAY!!</button>
+                    <button className="play" onClick={play}>PLAY</button>
                 </div>
             </div>
             <div className="table" id="table" onMouseDown={getPos}>
                 <div className="topTable" id="topTable">
                     <button className="reset" onClick={limpiarApuesta}>Reset Bet</button>
-                    <label htmlFor="saldo" className="saldo">SALDO DISPONIBLE : </label>
-                    {saldo} Coins
-                    <label htmlFor="coinValue" className="coinValue">FICHA SELECCIONADA : </label>
-                    {coinValue}
+                    <span className="saldo">SALDO DISPONIBLE : {saldo}</span><br />
+                    <span className="coinValue">FICHA SELECCIONADA : {coinValue}</span>
+
                 </div>
                 <div className="fichasContainer" id="fichasContainer">
-                    <img src={fichas} className="fichas" id="fichas" />
+                    <img src={fichas} className="fichas" id="fichas" alt="fichas" width="300px" height="100px"/>
                 </div>
                 <div className="fichasColocadas">
                     {
                         squareArray.map((value, index) =>
                             <div className="fichaIndiv" id={index} key={index}>
 
-                                <img src={ficha1Vacia} alt=" " id="ficha1" style={{ position: "absolute" }} />
-                                <img src={ficha5Vacia} alt=" " id="ficha5" style={{ position: "absolute" }} />
-                                <img src={ficha10Vacia} alt=" " id="ficha10" style={{ position: "absolute" }} />
-                                <img src={ficha25Vacia} alt=" " id="ficha25" style={{ position: "absolute" }} />
-                                <img src={ficha50Vacia} alt=" " id="ficha50" style={{ position: "absolute" }} />
-                                <img src={ficha100Vacia} alt=" " id="ficha100" />
+                                <img src={ficha1Vacia} alt="1" id="ficha1" style={{ position: "absolute" }} />
+                                <img src={ficha5Vacia} alt="5" id="ficha5" style={{ position: "absolute" }} />
+                                <img src={ficha10Vacia} alt="10" id="ficha10" style={{ position: "absolute" }} />
+                                <img src={ficha25Vacia} alt="25" id="ficha25" style={{ position: "absolute" }} />
+                                <img src={ficha50Vacia} alt="50" id="ficha50" style={{ position: "absolute" }} />
+                                <img src={ficha100Vacia} alt="100" id="ficha100" />
                                 <span id={"span " + index} style={{ position: "absolute" }}></span>
                             </div>)
                     }
                 </div>
-                <img src={tablaImg} className="tabla" id="tabla" />
+                <img src={tablaImg} alt="tabla" className="tabla" id="tabla" />
 
             </div>
 
