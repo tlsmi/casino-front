@@ -417,7 +417,7 @@ const Roulette = () => {
             <div className="table" id="table" onMouseDown={getPos}>
                 <div className="topTable" id="topTable">
                     <button className="reset" onClick={limpiarApuesta}>Reset Bet</button>
-                    <span className="saldo">SALDO DISPONIBLE : {saldo}</span><br />
+                    <span className="saldo">SALDO : {saldo}</span><br />
                     <span className="coinValue">FICHA SELECCIONADA : {coinValue}</span>
 
                 </div>
