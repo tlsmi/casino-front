@@ -48,7 +48,7 @@ const App: React.FC = () => {
     standDisabled: false,
     resetDisabled: true,
   });
-  const [game, setGame] = useState(false);
+  const [winnings, setWinning] = useState(0);
 
   useEffect(() => {
     getCredito();
@@ -74,31 +74,25 @@ const App: React.FC = () => {
   useEffect(() => {
     if (gameState === GameState.INIT) {
       start();
-      //drawCard(Deal.USER);
-      //drawCard(Deal.HIDDEN);
-      //drawCard(Deal.USER);
-      //drawCard(Deal.DEALER);
-      //setGameState(GameState.USER_TURN);
-      //setMessage(Message.HIT_STAND);
     }
   }, [gameState]);
 
   const start = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/games/blackjack1/start",
+        "http://localhost:8080/games/blackjack/start",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: sessionStorage.getItem("token") || "",
           },
-          body: JSON.stringify({ apuesta: balance }),
+          body: JSON.stringify({ apuesta: bet }),
         }
       );
-      setGame(true);
       const data = await response.json();
-      setBalance(data.betAmount);
+      setBalance(data.balance);
+      setBet(data.betAmount);
 
       let userDeck = data.player.hand;
       let dealerDeck = data.dealer.hand;
@@ -189,7 +183,6 @@ const App: React.FC = () => {
         checkWin();
       } else {
         getCardDealer();
-        //drawCard(Deal.DEALER);
       }
     }
   }, [dealerCount]);
@@ -197,7 +190,7 @@ const App: React.FC = () => {
   const getCardDealer = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/games/blackjack1/stand",
+        "http://localhost:8080/games/blackjack/stand",
         {
           method: "POST",
           headers: {
@@ -234,6 +227,7 @@ const App: React.FC = () => {
     setDealerCount(0);
 
     setBet(0);
+    setWinning(0);
 
     setGameState(GameState.BET);
     setMessage(Message.BET);
@@ -351,7 +345,7 @@ const App: React.FC = () => {
   const hit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/games/blackjack1/hit",
+        "http://localhost:8080/games/blackjack/hit",
         {
           method: "POST",
           headers: {
@@ -373,7 +367,6 @@ const App: React.FC = () => {
     } catch (err) {
       console.error("Error: " + err);
     }
-    //drawCard(Deal.USER);
   };
 
   const stand = () => {
@@ -395,21 +388,43 @@ const App: React.FC = () => {
 
   const checkWin = () => {
     if (userScore > dealerScore || dealerScore > 21) {
-      getCredito();
-      setBalance(Math.round((balance + bet * 2) * 100) / 100);
+      win("WIN");
       setMessage(Message.USER_WIN);
     } else if (dealerScore > userScore) {
+      setWinning(bet);
       setMessage(Message.DEALER_WIN);
     } else {
-      setBalance(Math.round((balance + bet * 1) * 100) / 100);
+      win("TIE");
       setMessage(Message.TIE);
     }
   };
 
+  const win = async (result:string) => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/games/blackjack/win",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: sessionStorage.getItem("token") || "",
+          },
+          body: JSON.stringify({ apuesta: bet, resultado: result}),
+        });
+        const data = await response.json();
+
+        if (result === "WIN") setWinning(bet * 2);
+        else if (result === "TIE") setWinning(bet);
+        setBalance(data);
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  }
+
   return (
     <>
       <div className="main">
-        <Status message={message} balance={balance} />
+        <Status message={message} balance={balance} winnings={winnings} />
         <Controls
           balance={balance}
           gameState={gameState}
