@@ -1,3 +1,7 @@
+body{
+  background-color: darkgreen;
+}
+
 .card {
   width: 120px;
   height: 260px;

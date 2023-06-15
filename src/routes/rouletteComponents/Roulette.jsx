@@ -73,6 +73,7 @@ const Roulette = () => {
         } else if (num >= 100) {
             return 5;
         }
+        return 0;
 
     }
 
@@ -99,7 +100,9 @@ const Roulette = () => {
             if (squareArray[i] !== 0) {
                 for (let k = 0; k < 4; k++) {
                     if (Math.pow(10, k) <= squareArray[i]) {
+                        console.log(squareArray[i]);
                         document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
+                        console.log(document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display);
                         document.getElementById("span " + i).style.top = document.getElementById(i).getBoundingClientRect().width * 0.2 + "px"
                         document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.4 - 0.05 * k) + "px"
                         document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width * (0.5 - 0.07 * k) + "px"
@@ -120,13 +123,13 @@ const Roulette = () => {
             const widthTabla = tabla.width;
 
             // Posiciones de los bordes horizontales y verticales necesarios de las fichas
-            const inicioHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height / 3;
-            const finHeightFichas = 96 + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
+            const inicioHeightFichas = document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height / 3;
+            const finHeightFichas =  document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
             const tamanoFicha = widthTabla * 0.3 / 6;
 
 
             // Posiciones de los bordes horizontales y verticales necesarios de la tabla
-            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + 96 + document.getElementById('topTable').getBoundingClientRect().height;
+            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + document.getElementById('navbar').getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height;
             const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width * 0.104) / 13;
             const heightSquare = document.getElementById('tabla').getBoundingClientRect().height / 5;
 
@@ -408,7 +411,7 @@ const Roulette = () => {
                 <img src={bola} className="bola" id="bola" alt="bola" />
                 <img src={ruleta} className="ruletaImg" id="ruletaImg" alt="ruleta" width="300px" height="300px"/>
                 <div className="boton">
-                    <button className="play" onClick={play}>PLAY</button>
+                    <button className="playRoulette" onClick={play}>PLAY</button>
                 </div>
             </div>
             <div className="table" id="table" onMouseDown={getPos}>

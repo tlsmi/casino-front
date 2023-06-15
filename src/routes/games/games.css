@@ -1,0 +1,95 @@
+
+body{
+    background-color: rgb(36, 36, 36);
+    overflow-x: hidden;
+}
+
+.containerGames{
+    background-color: rgb(36, 36, 36);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.gamesContainer{
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    flex-direction: row;
+    height: 95vh;
+
+}
+
+@font-face {
+    font-family: 'Casino';
+    src: url('../rouletteComponents/fonts/Casino.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
+.header{
+    color: yellow;
+    font-family: "Casino";    
+    text-align: center;
+    font-size: 10vh;
+    background-color: rgb(36, 36, 36);
+}
+
+.logo{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.link{
+    height: 50%;
+    padding: 10%;
+}
+
+
+
+.imgContainer{
+    display: flex;
+    flex-direction: column;
+    width: 33vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo{
+    color: yellow;
+    font-size: xx-large;
+    
+}
+
+@media only screen and (max-width: 1211px) {
+
+    .gamesContainer{
+        background-color: rgb(36, 36, 36);
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imgContainer{
+        padding-top: 3%;
+        height: 33%;
+        width: 100%;
+    }
+
+    .logo{
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+    }
+
+    .link{
+        height: 90%;
+        padding: 0%;
+        padding-bottom: 2%;
+    }
+}
