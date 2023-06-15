@@ -59,9 +59,9 @@ const Password = () => {
   };
 
   return (
-    <div>
+    <div className='divform'>
       <p>
-        <a href="/profile">Profile</a>
+        <a href="/profile" className='redirect'>Profile</a>
       </p>
       <form onSubmit={handleSubmit}>
         <label>

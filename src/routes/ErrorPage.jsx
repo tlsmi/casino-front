@@ -1,10 +1,10 @@
 import React from 'react';
-
+import '../static/css/error_page.css';
 const ErrorPage = () => {
   return (
-    <div>
-      <h1>Error 404: Página no encontrada</h1>
-      <p>Lo sentimos, la página que estás buscando no se encuentra disponible.</p>
+    <div className='error'>
+      <h1 id='errorh1'>Error 404: Page not found :(</h1>
+      <p id='errorText'>Sorry, the page you are looking for is not available.</p>
     </div>
   );
 };

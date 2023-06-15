@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../static/css/profile_style.css';
 
 const Profile = () => {
     const [formData, setFormData] = useState({
@@ -17,14 +18,44 @@ const Profile = () => {
         password: '',
     });
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     useEffect(() => {
-        // Recuperar el objeto JSON desde sessionStorage
         const storedData = sessionStorage.getItem('user');
 
         if (storedData) {
-            // Si hay datos almacenados en sessionStorage, actualizar el estado con esos valores
             setFormData(JSON.parse(storedData));
         }
+
+        const fetchProfile = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+
+                const response = await fetch('http://localhost:8080/getprofile', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+
+                    setFormData(user);
+                } else {
+                    console.log('Error en la petición GET');
+                    const errorData = await response.json();
+                    const errorMessage = errorData.message || 'Error en la petición GET';
+                    setErrorMessage(errorMessage);
+                }
+            } catch (error) {
+                console.log('Error al realizar la petición GET:', error);
+                setErrorMessage('Error al realizar la petición GET');
+            }
+        };
+
+        fetchProfile();
     }, []);
 
     const handleInputChange = (event) => {
@@ -101,12 +132,19 @@ const Profile = () => {
                     sessionStorage.setItem('user', JSON.stringify(user));
                 } else {
                     console.log('Error en la petición GET');
+                    const errorData = await getProfileResponse.json();
+                    const errorMessage = errorData.message || 'Error en la petición GET';
+                    setErrorMessage(errorMessage);
                 }
             } else {
                 console.log('Error en la petición PUT');
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Error en la petición PUT';
+                setErrorMessage(errorMessage);
             }
         } catch (error) {
             console.log('Error al realizar la petición PUT:', error);
+            setErrorMessage('Error al realizar la petición PUT');
         }
     };
 
@@ -116,18 +154,22 @@ const Profile = () => {
     };
 
     const validateEmail = (email) => {
+        // eslint-disable-next-line
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         return emailRegex.test(email);
     };
 
-
-
-
+    const logout = () => {
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('token');
+        window.location.href = '/login';
+    };
     return (
-        <div>
-            <p>
-                <a href="/profile/password">Change password</a>
-            </p>
+        <div className='divform' id='profile'>
+            <div>
+                <h1 id='nombre-perfil'>{formData.name}'s profile</h1>
+                <button onClick={logout} className='redirect'>Log out</button>
+            </div>
             <form onSubmit={handleSubmit}>
                 <label>
                     DNI:
@@ -167,8 +209,13 @@ const Profile = () => {
                         minLength={8} />
                     {errors.password && <span>{errors.password}</span>}
                 </label>
+                <p>{errorMessage}</p>
+                <p>
+                    <a href="/profile/password" className='redirect'>Change password</a>
+                </p>
                 <br />
-                <button type="submit">Enviar</button>
+                <button type="submit">Change Profile</button>
+
             </form>
         </div>
     );

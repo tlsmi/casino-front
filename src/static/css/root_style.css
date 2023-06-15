@@ -1,0 +1,45 @@
+/* root_style.css */
+.rootnav {
+    background-color: black;
+    padding: 10px;
+    border: 3px solid gold;
+    border-style:double;
+  }
+  
+  .rootli {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: gold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .rootli:last-child {
+    margin-right: 0;
+  }
+  
+  .rootli:hover {
+    background-color: green;
+  }
+  
+  #fichaRoja {
+    width: 25px;
+    height: auto;
+  }
+  
+  .rootul {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .roota {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .roota:hover {
+    color: #ffc107;
+  }
+  

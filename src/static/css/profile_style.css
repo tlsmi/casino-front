@@ -1,0 +1,18 @@
+#profile{
+    background-image: url("../img/profile-casino.avif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#nombre-perfil {
+    display: inline-block;
+    /* background-color: black; */
+    background-image: url("../img/moqueta.jpg");
+    color: whitesmoke;
+    padding: 5px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid gold;
+    -webkit-text-stroke: 1px black;
+  }

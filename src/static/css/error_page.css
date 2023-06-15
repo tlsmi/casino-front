@@ -1,0 +1,17 @@
+.error {
+    background-color: black;
+    color: gold;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  #errorh1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  #errorText {
+    font-size: 18px;
+    color: gold;
+  }
