@@ -1,0 +1,187 @@
+html{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.container {
+    background-color: darkgreen;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.ruleta {
+    text-align: center;
+    padding-top: 0.5%;
+    width: 40%;
+    width: 40%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.topTable{
+    text-align: right;
+    font-weight: bold;
+    color: yellow;
+    margin-right: 2%;
+}
+
+
+.reset{
+    margin-top: 1%;
+    margin-right:30%;
+    color: yellow;
+    background-color: rgb(4, 85, 4);
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 15px;
+    border: dotted;
+}
+
+span{
+    font-weight: bold;
+    color: white;
+}
+
+.coinValue{
+    margin-left: 5%;
+    color: yellow;
+}
+
+.fichaIndiv{
+    position: absolute;
+    width:3.5%;
+}
+
+#ficha1{
+    width: 100%;
+    display: none;
+}
+
+#ficha5{
+    width: 100%;
+    display: none;
+}
+#ficha10{
+    width: 100%;
+    display: none;
+}
+#ficha25{
+    width: 100%;
+    display: none;
+}
+#ficha50{
+    width: 100%;
+    display: none;
+}
+#ficha100{
+    width: 100%;
+    display: none;
+}
+@font-face {
+    font-family: 'Casino';
+    src: url('./fonts/Casino.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+.boton {
+    text-align: center;
+}
+
+.play {
+    margin-top: 1%;
+    color: yellow;
+    background-color: rgb(4, 85, 4);
+    font-weight: bold;
+    font-size: 2.5rem;
+    border-radius: 15px;
+    border: dotted;
+}
+
+
+
+.ruletaImg {
+    width: 100%;
+    height: auto;
+}
+
+.fichas {
+    
+    width: 30%;
+    height: 7.5%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    
+}
+
+.tabla {
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    height: 25%;
+}
+
+#saldo{
+    text-align: center;
+    font-family: 'casino';
+    color: yellow;
+    margin-top: 10px;
+    margin-right: 2%;
+}
+
+#fichasContainer{
+    text-align: center;
+    
+}
+
+.saldo {
+    text-align: right;
+    font-weight: bold;
+    color: yellow;
+    height: 2%;
+    width: 50%;
+    margin-right: 0;
+}
+
+.table {
+    width: 100%;
+    height: 100%;
+}
+
+.bola {
+    position: absolute;
+    z-index: 1000;
+    width: 25.75%;
+}
+
+@media only screen and (max-width: 800px) {
+    .container {
+        display: flex;
+        flex-direction:column-reverse;
+    }
+
+    .ruleta{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       
+    }
+
+    .boton{
+        justify-content: center;
+        padding-left: 20%;
+    }
+    
+    .bola {
+        position: absolute;
+        z-index: 1000;
+        width:40%;
+    }
+    
+    .fichaIndiv{
+        position: absolute;
+        width:5%;
+    }
+}
