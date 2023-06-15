@@ -48,7 +48,7 @@ const Roulette = () => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                    "Authorization": sessionStorage.getItem("token"),
                 }
             });
             const data = await response.json();
@@ -92,7 +92,7 @@ const Roulette = () => {
                 for (let j = 1; j < 4; j++) {
                     if ((i - j) % 3 === 0) {
                         document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * (3 - j) + heightSquare * 0.2) + "px";
-                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3)+0.1) + "px";
+                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3) + 0.1) + "px";
 
                     }
                 }
@@ -124,7 +124,7 @@ const Roulette = () => {
 
             // Posiciones de los bordes horizontales y verticales necesarios de las fichas
             const inicioHeightFichas = document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height / 3;
-            const finHeightFichas =  document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
+            const finHeightFichas = document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height + document.getElementById('fichasContainer').getBoundingClientRect().height * 2 / 3;
             const tamanoFicha = widthTabla * 0.3 / 6;
 
 
@@ -409,7 +409,7 @@ const Roulette = () => {
         <div className="container" >
             <div className="ruleta" id="ruleta">
                 <img src={bola} className="bola" id="bola" alt="bola" />
-                <img src={ruleta} className="ruletaImg" id="ruletaImg" alt="ruleta" width="300px" height="300px"/>
+                <img src={ruleta} className="ruletaImg" id="ruletaImg" alt="ruleta" width="300px" height="300px" />
                 <div className="boton">
                     <button className="playRoulette" onClick={play}>PLAY</button>
                 </div>
@@ -422,7 +422,7 @@ const Roulette = () => {
 
                 </div>
                 <div className="fichasContainer" id="fichasContainer">
-                    <img src={fichas} className="fichas" id="fichas" alt="fichas" width="300px" height="100px"/>
+                    <img src={fichas} className="fichas" id="fichas" alt="fichas" width="300px" height="100px" />
                 </div>
                 <div className="fichasColocadas">
                     {
