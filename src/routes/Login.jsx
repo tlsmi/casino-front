@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../static/css/forms.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -32,7 +33,6 @@ const Login = () => {
                 if (response.ok) {
                     console.log('Login successful');
                     sessionStorage.setItem("token", jsonData.token)
-                    sessionStorage.setItem("user", JSON.stringify(jsonData.user))
                     window.location.href = '/'
 
                 } else {
@@ -85,7 +85,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='divform'>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -102,6 +102,9 @@ const Login = () => {
                 <br />
                 <button type="submit">Submit</button>
             </form>
+            <p>
+                <a href="/signup" className='redirect'>Register</a>
+            </p>
             <p>{message}</p>
         </div>
     );
