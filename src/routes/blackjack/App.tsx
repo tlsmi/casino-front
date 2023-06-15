@@ -416,6 +416,7 @@ const App: React.FC = () => {
         if (result === "WIN") setWinning(bet * 2);
         else if (result === "TIE") setWinning(bet);
         setBalance(data);
+        getCredito();
     } catch (err) {
       console.error("Error: " + err);
     }
