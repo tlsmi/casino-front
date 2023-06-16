@@ -81,6 +81,9 @@ const SlotGame = () => {
   return (
     <div>
       <div id="app">
+          <p className="creditoSlot">
+            Coins: <span id="credito">{credito}</span>
+          </p>
         <div className="table-container">
           <table className="table">
             <thead>
@@ -116,20 +119,9 @@ const SlotGame = () => {
             </div>
           </div>
         </div>
-        <div>
-          <button className="spins" id="spinColumn1" onClick={() => spin()} style={{ display: 'none' }}>
-            Spin
-          </button>
-          <button className="spins" id="spinColumn2" onClick={() => spin()} style={{ display: 'none' }}>
-            Spin
-          </button>
-          <button className="spins" id="spinColumn3" onClick={() => spin()} style={{ display: 'none' }}>
-            Spin
-          </button>
-        </div>
         <div className="buttons">
           <button id="spinner" onClick={() => spin()}>
-            Spin All
+           <span> Spin All </span>
           </button>
         </div>
         <div id="message" className="message" style={{ display: 'none' }}>
@@ -137,10 +129,7 @@ const SlotGame = () => {
         </div>
 
         <div>
-          <p>
-            Credito: <span id="credito">{credito}</span>
-          </p>
-          <p>
+          <p className="apuestaSlot">
             Apostar:{" "}
             <input
               type="number"

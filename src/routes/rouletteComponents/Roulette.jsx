@@ -13,7 +13,9 @@ import anime from 'animejs/lib/anime.es'
 import swal from "sweetalert"
 import React, { useEffect, useState } from 'react';
 
+
 const Roulette = () => {
+    const [width, setWidth] = useState(2);
     const [saldo, setSaldo] = useState(0);
     const [coinValue, setCoinValue] = useState(1);
     const [saldoInicial, setSaldoInicial] = useState(0);
@@ -77,38 +79,74 @@ const Roulette = () => {
 
     }
 
-    function posicionarFichas(inicioHeightTabla, inicioWidthTabla, heightSquare, widthSquare) {
-        for (let i = 0; i < 49; i++) {
-            if (i === 0) {
-                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare + heightSquare * 0.25) + "px";
-                document.getElementById(i).style.left = (inicioWidthTabla + widthSquare * 0.5) + "px";
-            } else if (i > 39 && i < 43) {
-                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * 3 + heightSquare * 0.25) + "px";
-                document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * (1.5 + 4 * (i - 40))) + "px";
-            } else if (i > 42) {
-                document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * 4 + heightSquare * 0.25) + "px";
-                document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * (0.5 + 2 * (i - 43))) + "px";
-            } else {
-                for (let j = 1; j < 4; j++) {
-                    if ((i - j) % 3 === 0) {
-                        document.getElementById(i).style.top = (inicioHeightTabla + heightSquare * (3 - j) + heightSquare * 0.2) + "px";
-                        document.getElementById(i).style.left = (inicioWidthTabla + document.getElementById('tabla').getBoundingClientRect().width * 0.104 + widthSquare * ((i - j) / 3) + 0.1) + "px";
+    window.onresize = function(){
+        posicionarFichas();
+    }
+
+    function posicionarFichas() {
+        
+        if (window.innerWidth <= 800 ) {
+            for (let i = 0; i < 49; i++) {
+                if (i === 0) {
+                    document.getElementById(i).style.top = "9vw";
+                    document.getElementById(i).style.left = "12.5%";
+                } else if (i > 39 && i < 43) {
+                    document.getElementById(i).style.top = "23vw";
+                    document.getElementById(i).style.left = (18.5 + 8.25 + 22.0 * (i - 40)) + "%";
+                } else if (i > 42) {
+                    document.getElementById(i).style.top = "28.2vw";
+                    document.getElementById(i).style.left = (18.5 + 2.25 + 11 * (i - 43)) + "%";
+                } else {
+                    for (let j = 1; j < 4; j++) {
+                        if ((i - j) % 3 === 0) {
+                            document.getElementById(i).style.top = (1.5 + 7.5 * (3 - j)) + "vw"
+                            document.getElementById(i).style.left = (18.5 + 5.5 * ((i - j) / 3)) + "%";
+                        }
+                    }
+                }
+                if (squareArray[i] !== 0) {
+                    for (let k = 0; k < 4; k++) {
+                        if (Math.pow(10, k) <= squareArray[i]) {
+                            document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
+                            document.getElementById("span " + i).style.top = "1vh"
+                            document.getElementById("span " + i).style.left = (40 - (12 * k)) + "%"
+                            document.getElementById("span " + i).style.fontSize = "2vw"
+                            document.getElementById("span " + i).innerHTML = squareArray[i];
+                        }
 
                     }
                 }
             }
-            if (squareArray[i] !== 0) {
-                for (let k = 0; k < 4; k++) {
-                    if (Math.pow(10, k) <= squareArray[i]) {
-                        console.log(squareArray[i]);
-                        document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
-                        console.log(document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display);
-                        document.getElementById("span " + i).style.top = document.getElementById(i).getBoundingClientRect().width * 0.2 + "px"
-                        document.getElementById("span " + i).style.left = document.getElementById(i).getBoundingClientRect().width * (0.4 - 0.05 * k) + "px"
-                        document.getElementById("span " + i).style.fontSize = document.getElementById(i).getBoundingClientRect().width * (0.5 - 0.07 * k) + "px"
-                        document.getElementById("span " + i).innerHTML = squareArray[i];
+        } else if (window.innerWidth > 800 ){
+            for (let i = 0; i < 49; i++) {
+                if (i === 0) {
+                    document.getElementById(i).style.top = "6vw";
+                    document.getElementById(i).style.left = "8.25%";
+                } else if (i > 39 && i < 43) {
+                    document.getElementById(i).style.top = "15.5vw";
+                    document.getElementById(i).style.left = (12.5 + 6 + 15.5* (i - 40)) + "%";
+                } else if (i > 42) {
+                    document.getElementById(i).style.top = "19.5vw";
+                    document.getElementById(i).style.left = (12.5 + 2 + 7.5 * (i - 43)) + "%";
+                } else {
+                    for (let j = 1; j < 4; j++) {
+                        if ((i - j) % 3 === 0) {
+                            document.getElementById(i).style.top = (0.75 + 5 * (3 - j)) + "vw"
+                            document.getElementById(i).style.left = (12.75 + 3.8 * ((i - j) / 3)) + "%";
+                        }
                     }
+                }
+                if (squareArray[i] !== 0) {
+                    for (let k = 0; k < 4; k++) {
+                        if (Math.pow(10, k) <= squareArray[i]) {
+                            document.getElementById(i).getElementsByTagName("img")[selectTypeCoin(squareArray[i])].style.display = 'block';
+                            document.getElementById("span " + i).style.top = "1vh"
+                            document.getElementById("span " + i).style.left = (40 - (12 * k)) + "%"
+                            document.getElementById("span " + i).style.fontSize = "2vw"
+                            document.getElementById("span " + i).innerHTML = squareArray[i];
+                        }
 
+                    }
                 }
             }
         }
@@ -129,7 +167,7 @@ const Roulette = () => {
 
 
             // Posiciones de los bordes horizontales y verticales necesarios de la tabla
-            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + document.getElementById('navbar').getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height;
+            const inicioHeightTabla = document.getElementById('fichasContainer').getBoundingClientRect().height + document.getElementsByTagName("nav")[0].getBoundingClientRect().height + document.getElementById('topTable').getBoundingClientRect().height;
             const widthSquare = (document.getElementById('tabla').getBoundingClientRect().width - document.getElementById('tabla').getBoundingClientRect().width * 0.104) / 13;
             const heightSquare = document.getElementById('tabla').getBoundingClientRect().height / 5;
 
@@ -406,7 +444,7 @@ const Roulette = () => {
 
 
     return (
-        <div className="container" >
+        <div className="container" id="constinerRuleta" >
             <div className="ruleta" id="ruleta">
                 <img src={bola} className="bola" id="bola" alt="bola" />
                 <img src={ruleta} className="ruletaImg" id="ruletaImg" alt="ruleta" width="300px" height="300px" />
@@ -417,8 +455,8 @@ const Roulette = () => {
             <div className="table" id="table" onMouseDown={getPos}>
                 <div className="topTable" id="topTable">
                     <button className="reset" onClick={limpiarApuesta}>Reset Bet</button>
-                    <span className="saldo">SALDO : {saldo}</span><br />
-                    <span className="coinValue">FICHA SELECCIONADA : {coinValue}</span>
+                    <span className="saldo">COINS : {saldo}</span><br />
+                    <span className="coinValue"> CHIP : {coinValue}</span>
 
                 </div>
                 <div className="fichasContainer" id="fichasContainer">
@@ -434,7 +472,7 @@ const Roulette = () => {
                                 <img src={ficha10Vacia} alt="10" id="ficha10" style={{ position: "absolute" }} />
                                 <img src={ficha25Vacia} alt="25" id="ficha25" style={{ position: "absolute" }} />
                                 <img src={ficha50Vacia} alt="50" id="ficha50" style={{ position: "absolute" }} />
-                                <img src={ficha100Vacia} alt="100" id="ficha100" />
+                                <img src={ficha100Vacia} alt="100" id="ficha100" style={{ position: "absolute" }}/>
                                 <span id={"span " + index} style={{ position: "absolute" }}></span>
                             </div>)
                     }

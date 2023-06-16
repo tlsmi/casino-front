@@ -384,6 +384,7 @@ const App: React.FC = () => {
     buttonState.resetDisabled = false;
     setButtonState({ ...buttonState });
     setMessage(Message.BUST);
+    setWinning(bet);
   };
 
   const checkWin = () => {
@@ -393,7 +394,7 @@ const App: React.FC = () => {
     } else if (dealerScore > userScore) {
       setWinning(bet);
       setMessage(Message.DEALER_WIN);
-    } else {
+    }else {
       win("TIE");
       setMessage(Message.TIE);
     }

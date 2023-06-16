@@ -12,7 +12,7 @@ const Status: React.FC<StatusProps> = ({ message, balance, winnings }) => {
 
   if (message === "You Win!") {
     displayedMessage = `${message} +$${winnings}!`;
-  } else if (message === "Dealer Wins!" || message === "Bust!") displayedMessage = `${message} -$${winnings}`
+  } else if (message === "Dealer Wins!" || message === "Bust!") displayedMessage = `${message} -$${winnings}!`
   return (
     <div className="statusContainer">
       <div className="status">

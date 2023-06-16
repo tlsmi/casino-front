@@ -18,7 +18,8 @@ export default function Root() {
     window.location.href !== 'http://localhost:3000/signup' &&
     window.location.href !== 'http://localhost:3000/' &&
     window.location.href !== 'http://localhost:3000/games' &&
-    window.location.href !== 'http://localhost:3000/aboutus'
+    window.location.href !== 'http://localhost:3000/aboutus' &&
+    window.location.href !== 'http://localhost:3000/buy'
   ) {
     window.location.href = '/login';
   }

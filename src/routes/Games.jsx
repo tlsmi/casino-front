@@ -6,7 +6,12 @@ import "./games/games.css"
 const Games = () => {
     console.log(window.innerWidth)
     return <div className="containerGames">
-        <div className="header">GAMES</div>
+        <div className="header">
+            GAMES 
+            <div className="warning">
+            ⚠️En caso de apostar y salir en medio del juego la cantidad apostada se perderá, o se aplicará el balance de la apuesta realizada
+            </div>
+        </div>
         <div className="gamesContainer">
 
             <div className="imgContainer">

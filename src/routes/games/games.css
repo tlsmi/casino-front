@@ -28,6 +28,15 @@ body{
     font-display: swap;
 }
 
+.warning{
+    font-family:monospace;
+    font-size: large;
+    border: solid 1px yellow;
+    border-radius: 15px;
+    margin: 2%;
+    padding: 0.5%;
+}
+
 .header{
     color: yellow;
     font-family: "Casino";    
