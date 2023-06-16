@@ -34,7 +34,7 @@ export default function Root() {
     <>
       <div>
         <nav className='rootnav'>
-          <button className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+          <button className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Name">
             <span></span>
             <span></span>
             <span></span>
