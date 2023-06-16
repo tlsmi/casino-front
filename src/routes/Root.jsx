@@ -5,6 +5,16 @@ import fichaRojaImg from '../static/img/ficha-roja.webp'; // Importa la imagen
 import home from '../static/img/homepage.webp'; // Importa la imagen
 
 export default function Root() {
+  console.log(window.location.href)
+  if (sessionStorage.getItem('token') === null &&
+      window.location.href !== "http://localhost:3000/login" &&
+      window.location.href !== "http://localhost:3000/signup" &&
+      window.location.href !== "http://localhost:3000/" &&
+      window.location.href !== "http://localhost:3000/games" &&
+      window.location.href !== "http://localhost:3000/aboutus") {
+    window.location.href = '/login'
+  }
+
   const handleProfileClick = () => {
     if (sessionStorage.getItem("token") === null) {
       window.location.href = "/login";

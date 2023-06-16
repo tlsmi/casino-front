@@ -2,13 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
 .main {
   background: rgb(0, 78, 0);
   margin: 0;
   font-family: 'Lexend Exa', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
 }
 
 nav {
