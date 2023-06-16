@@ -19,7 +19,8 @@ export default function Root() {
     window.location.href !== 'http://localhost:3000/' &&
     window.location.href !== 'http://localhost:3000/games' &&
     window.location.href !== 'http://localhost:3000/aboutus' &&
-    window.location.href !== 'http://localhost:3000/help'
+    window.location.href !== 'http://localhost:3000/help' &&
+    window.location.href === 'http://localhost:3000/buy'
   ) {
     window.location.href = '/login';
   }
@@ -64,6 +65,11 @@ export default function Root() {
             <li className='rootli'>
               <Link className='roota' to='/help'>
                 Help
+              </Link>
+            </li>
+            <li className='rootli' onClick={handleProfileClick}>
+              <Link className='roota' to='/buy'>
+                Buy Coins
               </Link>
             </li>
           </ul>

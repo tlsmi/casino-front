@@ -98,7 +98,6 @@ button[type="submit"]:hover {
   .redirect:hover::after {
     width: 100%;
   }
-
   @media only screen and (max-width: 490px) {
     .divHeader{
       display: flex;
@@ -113,5 +112,10 @@ button[type="submit"]:hover {
     .redirect{
       width: 50%;
     }
+  }
+  
+
+  #buy{
+    height: 120vh;
   }
   

@@ -22,6 +22,7 @@ import HelpPage from './routes/help/Help';
 import SlotMachineExplanation from './routes/help/Help_slot';
 import RouletteExplanation from './routes/help/Help_roulette';
 import BlackjackExplanation from './routes/help/Help_blackjack';
+import BuyForm from './routes/Buy';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: "/help/roulette",
         element: <RouletteExplanation />
+      },
+      {
+        path: "/buy",
+        element: <BuyForm />
       },
     ]
   },
