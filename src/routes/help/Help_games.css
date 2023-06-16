@@ -1,0 +1,35 @@
+.slot-machine-container {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .slot-machine-container {
+    height: 200vh;
+  }
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: gold;
+}
+
+.content {
+  font-size: 18px;
+}
+
+.content ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.content strong {
+  color: gold;
+}
+
+.content p {
+  margin-bottom: 10px;
+}

@@ -19,7 +19,7 @@ export default function Root() {
     window.location.href !== 'http://localhost:3000/' &&
     window.location.href !== 'http://localhost:3000/games' &&
     window.location.href !== 'http://localhost:3000/aboutus' &&
-    window.location.href !== 'http://localhost:3000/buy'
+    window.location.href !== 'http://localhost:3000/help'
   ) {
     window.location.href = '/login';
   }
@@ -56,9 +56,14 @@ export default function Root() {
                 About Us
               </Link>
             </li>
-            <li className='rootli' id='profileNav'>
-              <Link className='roota' to='/profile' onClick={handleProfileClick}>
-                <img src={fichaRojaImg} width='100px' height='100px' alt='Profile' id='fichaRoja' />
+            <li className='rootli'>
+              <Link className='roota' to='/games'>
+                Games
+              </Link>
+            </li>
+            <li className='rootli'>
+              <Link className='roota' to='/help'>
+                Help
               </Link>
             </li>
           </ul>

@@ -1,0 +1,51 @@
+.help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 120vh;
+    background-color: black;
+  }
+  
+  .help-title {
+    color: gold;
+    text-decoration: underline;
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .help-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .help-button {
+    min-width: 200px;
+    max-width: 200px;
+    height: 200px;
+    border: none;
+    border-radius: 10px;
+    background-color: gold;
+    color: black;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .help-button:hover {
+    background-color: greenyellow;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .help-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
