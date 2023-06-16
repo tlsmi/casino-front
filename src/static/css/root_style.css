@@ -9,10 +9,12 @@
   .rootli {
     display: inline-block;
     margin-right: 10px;
-    padding: 8px 15px;
+    padding: 10px  15px 10px 15px;
     border-radius: 20px;
     background-color: gold;
     transition: background-color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
   }
   
   .rootli:last-child {

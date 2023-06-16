@@ -164,9 +164,14 @@ const Profile = () => {
         sessionStorage.removeItem('token');
         window.location.href = '/login';
     };
+    const deleteUser = () => {
+        window.location.href = '/deleteUser';
+    };
     return (
         <div className='divform' id='profile'>
             <div>
+            <button onClick={deleteUser} className='redirect'>Delete User</button>
+
                 <h1 id='nombre-perfil'>{formData.name}'s profile</h1>
                 <button onClick={logout} className='redirect'>Log out</button>
             </div>
@@ -214,9 +219,7 @@ const Profile = () => {
                     <p>
                         <a href="/profile/password" className='redirect'>Change password</a>
                     </p>
-                    <p>
-                        <a href="/profile/password" className='redirect'>Change password</a>
-                    </p>
+                   
                 </div>
                 <br />
                 <button type="submit">Change Profile</button>

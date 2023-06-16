@@ -17,6 +17,7 @@ import Games from './routes/Games';
 import Roulette from './routes/rouletteComponents/Roulette';
 import App from './routes/blackjack/App'
 import SlotGame from "./routes/slot/SlotGame";
+import DeleteUserForm from './routes/DeleteUser';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
         path: "/games/blackjack",
         element: <App />
       },
+      {
+        path: "/deleteUser",
+        element: <DeleteUserForm />
+      },
+
     ]
   },
 ]);
