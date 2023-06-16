@@ -2,6 +2,7 @@
     background-image: url("../img/profile-casino.webp");
     background-size: cover;
     background-repeat: no-repeat;
+    height: 130vh;
 }
 
 #nombre-perfil {

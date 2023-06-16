@@ -1,55 +1,112 @@
 /* root_style.css */
 .rootnav {
-    background-color: black;
-    padding: 10px;
-    border: 3px solid gold;
-    border-style:double;
+  background-color: black;
+  padding: 10px;
+  border: 3px solid gold;
+  border-style: double;
+}
+
+.rootli {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: gold;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.rootli:last-child {
+  margin-right: 0;
+}
+
+.rootli:hover {
+  background-color: green;
+}
+
+#fichaRoja {
+  width: 25px;
+  height: auto;
+}
+
+.rootul {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.roota {
+  color: black;
+  text-decoration: none;
+}
+
+.roota:hover {
+  color: #ffc107;
+}
+
+/* Menú Hamburguesa */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: gold;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease;
+}
+
+@media only screen and (max-width: 390px) {
+  .rootli{
+    width: 45%;
+    margin-top: 2%;
+    text-align: center;
   }
-  
+}
+
+/* Consulta de medios para pantallas pequeñas */
+@media (max-width: 768px) {
   .rootli {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 10px  15px 10px 15px;
-    border-radius: 20px;
-    background-color: gold;
-    transition: background-color 0.3s ease;
-    font-family: 'Montserrat', sans-serif;font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-  }
-  
-  .rootli:last-child {
-    margin-right: 0;
-  }
-  
-  .rootli:hover {
-    background-color: green;
-  }
-  
-  #fichaRoja {
-    width: 25px;
-    height: auto;
-  }
-  
-  .rootul {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .roota {
-    color: black;
-    text-decoration: none;
-  }
-  
-  .roota:hover {
-    color: #ffc107;
+    display: none;
   }
 
-  @media only screen and (max-width: 390px) {
-    .rootli{
-      width: 45%;
-      margin-top: 2%;
-      text-align: center;
-    }
+  .hamburger {
+    display: block;
   }
-  
+
+  .rootul.responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rootul.responsive li {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .rootul.responsive li:last-child {
+    margin-bottom: 0;
+  }
+
+  .hamburger span {
+    width: 20px;
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

@@ -5,6 +5,7 @@ const DeleteUserForm = () => {
     email: '',
     password: ''
   });
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,10 +25,14 @@ const DeleteUserForm = () => {
       if (response.ok) {
         sessionStorage.removeItem('token')
         console.log('User deleted successfully');
+        const responseData = await response.json();
+        setMessage(responseData.message);
         window.location.reload();
         // Handle success or redirect to another page
       } else {
         console.log('Error deleting user');
+        const responseData = await response.json();
+        setMessage(responseData.message);
         // Handle error
       }
     } catch (error) {
@@ -57,6 +62,7 @@ const DeleteUserForm = () => {
         <br />
         <button type="submit">Delete User</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };
