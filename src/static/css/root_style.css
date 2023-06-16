@@ -8,13 +8,26 @@
 
 .rootli {
   display: inline-block;
-  margin-right: 10px;
+  width: 24%;
+  text-align: center;
+  margin-right: 1%;
   padding: 10px 15px;
   border-radius: 20px;
   background-color: gold;
   transition: background-color 0.3s ease;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+}
+
+#profileNav{
+  margin-left: 11%;
+  margin-right: 1%;
+  width: 12%;
+}
+
+#homepageNav{
+  margin-right: 11%;
+  width: 12%;
 }
 
 .rootli:last-child {
@@ -49,6 +62,8 @@
 .hamburger {
   display: none;
   cursor: pointer;
+  background-color: hsl(0, 0%, 21%);
+  border-radius: 15px;
   padding: 10px;
 }
 
@@ -61,19 +76,23 @@
   transition: transform 0.3s ease;
 }
 
-@media only screen and (max-width: 390px) {
-  .rootli{
-    width: 45%;
-    margin-top: 2%;
-    text-align: center;
-  }
-}
-
 /* Consulta de medios para pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 790px) {
   .rootli {
     display: none;
+    margin-right: 0;
   }
+
+  #profileNav{
+  margin-left: 0;
+  margin-right: 0;
+  width: 24%;
+}
+
+#homepageNav{
+  margin-right: 0;
+  width: 24%;
+}
 
   .hamburger {
     display: block;

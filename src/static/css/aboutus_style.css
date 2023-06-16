@@ -1,7 +1,8 @@
-.aboutus {
+  .aboutus {
     color: whitesmoke;
     background-color: #1C1918;;
     font-family: 'Helvetica', sans-serif;
+    height: 100vh;
   }
   
   #thanks {
@@ -23,4 +24,10 @@
     font-size: 30px;
     margin-bottom: 30px;
     color: gold;
+  }
+
+  @media only screen and (max-width: 1080px) {
+    .aboutus {
+      height: 100%;
+    }
   }

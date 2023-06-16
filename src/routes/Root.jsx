@@ -39,14 +39,15 @@ export default function Root() {
             <span></span>
           </button>
           <ul className={`rootul ${isMenuOpen ? 'responsive' : ''}`}>
-            <li className='rootli'>
-              <Link className='roota' to='/profile' onClick={handleProfileClick}>
-                <img src={fichaRojaImg} width='100px' height='100px' alt='Profile' id='fichaRoja' />
+            
+            <li className='rootli' id='homepageNav'>
+              <Link className='roota' to='/'>
+                <img src={homeImg} width='100px' height='100px' alt='Home' id='fichaRoja' />
               </Link>
             </li>
             <li className='rootli'>
-              <Link className='roota' to='/'>
-                <img src={homeImg} width='100px' height='100px' alt='Home' id='fichaRoja' />
+              <Link className='roota' to='/games'>
+                Games
               </Link>
             </li>
             <li className='rootli'>
@@ -54,9 +55,9 @@ export default function Root() {
                 About Us
               </Link>
             </li>
-            <li className='rootli'>
-              <Link className='roota' to='/games'>
-                Games
+            <li className='rootli' id='profileNav'>
+              <Link className='roota' to='/profile' onClick={handleProfileClick}>
+                <img src={fichaRojaImg} width='100px' height='100px' alt='Profile' id='fichaRoja' />
               </Link>
             </li>
           </ul>
