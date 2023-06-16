@@ -96,4 +96,9 @@ button[type="submit"]:hover {
   .redirect:hover::after {
     width: 100%;
   }
+
+
+  #buy{
+    height: 120vh;
+  }
   
