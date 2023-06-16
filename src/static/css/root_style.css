@@ -44,4 +44,12 @@
   .roota:hover {
     color: #ffc107;
   }
+
+  @media only screen and (max-width: 390px) {
+    .rootli{
+      width: 45%;
+      margin-top: 2%;
+      text-align: center;
+    }
+  }
   

@@ -17,12 +17,14 @@ form {
     margin: 10px;
     background-image: url("../img/moqueta.webp");
     width: 50%;
+    padding:2%;
     margin-left: 25%;
 }
 
 label {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin-bottom: 15px;
     background-color: black;
     border-radius: 5px;
@@ -95,5 +97,21 @@ button[type="submit"]:hover {
   
   .redirect:hover::after {
     width: 100%;
+  }
+
+  @media only screen and (max-width: 490px) {
+    .divHeader{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #nombre-perfil{
+      width: 100%;
+    }
+
+    .redirect{
+      width: 50%;
+    }
   }
   
