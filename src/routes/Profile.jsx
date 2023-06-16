@@ -210,9 +210,14 @@ const Profile = () => {
                     {errors.password && <span>{errors.password}</span>}
                 </label>
                 <p>{errorMessage}</p>
-                <p>
-                    <a href="/profile/password" className='redirect'>Change password</a>
-                </p>
+                <div >
+                    <p>
+                        <a href="/profile/password" className='redirect'>Change password</a>
+                    </p>
+                    <p>
+                        <a href="/profile/password" className='redirect'>Change password</a>
+                    </p>
+                </div>
                 <br />
                 <button type="submit">Change Profile</button>
 
