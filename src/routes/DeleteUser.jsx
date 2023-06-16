@@ -12,8 +12,8 @@ const DeleteUserForm = () => {
     try {
       const token = sessionStorage.getItem('token');
 
-      const response = await fetch('/deleteUser', {
-        method: 'POST',
+      const response = await fetch('http://localhost:8080/deleteUser', {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
@@ -22,7 +22,9 @@ const DeleteUserForm = () => {
       });
 
       if (response.ok) {
+        sessionStorage.removeItem('token')
         console.log('User deleted successfully');
+        window.location.reload();
         // Handle success or redirect to another page
       } else {
         console.log('Error deleting user');
