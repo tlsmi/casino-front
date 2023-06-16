@@ -12,6 +12,7 @@ import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import Profile from './routes/Profile';
 import Password from './routes/Password';
+import Aboutus from './routes/Aboutus';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/password",
         element: <Password />
+      },
+      {
+        path: "/aboutus",
+        element: <Aboutus />
       },
     ]
   },

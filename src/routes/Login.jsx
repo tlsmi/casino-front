@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../static/css/forms.css';
-
+import '../static/css/logins.css'
 const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
@@ -85,7 +85,7 @@ const Login = () => {
     };
 
     return (
-        <div className='divform'>
+        <div className='divform' id='login'>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <label>

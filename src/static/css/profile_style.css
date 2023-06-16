@@ -1,5 +1,5 @@
 #profile{
-    background-image: url("../img/profile-casino.avif");
+    background-image: url("../img/profile-casino.webp");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -7,7 +7,7 @@
 #nombre-perfil {
     display: inline-block;
     /* background-color: black; */
-    background-image: url("../img/moqueta.jpg");
+    background-image: url("../img/moqueta.webp");
     color: whitesmoke;
     padding: 5px;
     text-align: center;

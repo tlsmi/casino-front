@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import '../static/css/root_style.css';
-import fichaRojaImg from '../static/img/ficha-roja.png'; // Importa la imagen
+import fichaRojaImg from '../static/img/ficha-roja.webp'; // Importa la imagen
+import home from '../static/img/homepage.webp'; // Importa la imagen
 
 export default function Root() {
   const handleProfileClick = () => {
@@ -17,14 +18,16 @@ export default function Root() {
           <ul className="rootul">
             <li className="rootli">
               <Link className="roota" to="/profile" onClick={handleProfileClick}>
-                <img src={fichaRojaImg} alt="Profile" id="fichaRoja" />
+                <img src={fichaRojaImg} width="100px" height="100px" alt="Profile" id="fichaRoja" />
               </Link>
             </li>
-            <li className="rootli"> 
-              <Link className="roota" to="/">Homepage</Link>
+            <li className="rootli">
+            <Link className="roota" to="/">
+                <img src={home} width="100px" height="100px" alt="Home" id="fichaRoja" />
+              </Link>
             </li>
             <li className="rootli">
-              <Link className="roota" to="/about">About Us</Link>
+              <Link className="roota" to="/aboutus">About Us</Link>
             </li>
             <li className="rootli">
               <Link className="roota" to="/games">Games</Link>
