@@ -1,0 +1,99 @@
+.divform {
+    background-color: #1C1918;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border: 2px gold;
+    height: 200vh;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid gold;
+    margin: 10px;
+    background-image: url("../img/moqueta.webp");
+    width: 50%;
+    margin-left: 25%;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    background-color: black;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"] {
+    padding: 8px;
+    border: none;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 5px;
+}
+
+button[type="submit"] {
+    background-color: #ffd700;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    border-top-left-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px
+}
+
+button[type="submit"]:hover {
+    background-color: #ffcc00;
+}
+
+.error {
+    color: #ff0000;
+    margin-top: 5px;
+}
+
+.redirect {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: greenyellow;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .redirect:hover {
+    background-color: green;
+    transform: scale(1.05);
+  }
+  
+  .redirect:active {
+    transform: scale(0.95);
+  }
+  
+  .redirect::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: greenyellow;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .redirect:hover::after {
+    width: 100%;
+  }
+  

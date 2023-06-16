@@ -1,0 +1,31 @@
+#login{
+    background-image: url("../img/logins.webp");
+    background-size: cover;
+    height: 100vh;
+    width: 96.3vw;
+}
+
+#signup{
+    background-image: url("../img/logins.webp");
+    background-size: cover;
+    height: 150vh;
+    width: 96.3vw;
+}
+
+#login h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    color: gold;
+    -webkit-text-stroke: 2px black;
+}
+
+#signup h1{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    color: gold;
+    -webkit-text-stroke: 2px black;
+}

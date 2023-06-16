@@ -1,0 +1,26 @@
+.aboutus {
+    color: whitesmoke;
+    font-family: 'Helvetica', sans-serif;
+  }
+  
+  #thanks {
+    text-align: center;
+    font-style: italic;
+  }
+  
+  .aboutus p {
+    text-align: justify;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  .aboutus h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    color: gold;
+  }

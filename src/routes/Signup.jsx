@@ -125,7 +125,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className='divform' id='signup'>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -178,7 +178,11 @@ const Signup = () => {
         <br />
         <button type="submit">Submit</button>
       </form>
+
       <p>{message}</p>
+      <p>
+        <a href="/login" className='redirect'>Login</a>
+      </p>
     </div>
 
   );

@@ -12,6 +12,7 @@ import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import Profile from './routes/Profile';
 import Password from './routes/Password';
+import Aboutus from './routes/Aboutus';
 import Games from './routes/Games';
 import Roulette from './routes/rouletteComponents/Roulette';
 import App from './routes/blackjack/App'
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/password",
         element: <Password />
+      },
+      {
+        path: "/aboutus",
+        element: <Aboutus />
       },
       {
         path: "/games",
