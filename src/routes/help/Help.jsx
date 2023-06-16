@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../static/css/help_page.css';
+import '../../static/css/help_page.css';
 
 const HelpPage = () => {
   return (

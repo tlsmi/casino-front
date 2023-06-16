@@ -16,7 +16,7 @@ import Games from './routes/Games';
 import Roulette from './routes/rouletteComponents/Roulette';
 import App from './routes/blackjack/App';
 import DeleteUserForm from './routes/DeleteUser';
-import HelpPage from './routes/Help';
+import HelpPage from './routes/help/Help';
 
 
 const router = createBrowserRouter([

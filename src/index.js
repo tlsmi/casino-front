@@ -18,7 +18,10 @@ import Roulette from './routes/rouletteComponents/Roulette';
 import App from './routes/blackjack/App'
 import SlotGame from "./routes/slot/SlotGame";
 import DeleteUserForm from './routes/DeleteUser';
-import HelpPage from './routes/Help';
+import HelpPage from './routes/help/Help';
+import SlotMachineExplanation from './routes/help/Help_slot';
+import RouletteExplanation from './routes/help/Help_roulette';
+import BlackjackExplanation from './routes/help/Help_blackjack';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,6 +74,18 @@ const router = createBrowserRouter([
       {
         path: "/help",
         element: <HelpPage />
+      },
+      {
+        path: "/help/slot",
+        element: <SlotMachineExplanation />
+      },
+      {
+        path: "/help/blackjack",
+        element: <BlackjackExplanation />
+      },
+      {
+        path: "/help/roulette",
+        element: <RouletteExplanation />
       },
     ]
   },
