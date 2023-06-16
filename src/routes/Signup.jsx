@@ -130,28 +130,28 @@ const Signup = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required/>
         </label>
         <br />
         <label>
           First Surname:
-          <input type="text" name="surname1" value={formData.surname1} onChange={handleChange} />
+          <input type="text" name="surname1" value={formData.surname1} onChange={handleChange} required/>
         </label>
         <br />
         <label>
           Second Surname:
-          <input type="text" name="surname2" value={formData.surname2} onChange={handleChange} />
+          <input type="text" name="surname2" value={formData.surname2} onChange={handleChange} required/>
         </label>
         <br />
         <label>
           Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+          <input type="email" name="email" value={formData.email} onChange={handleChange} required/>
           {errors.email && <span className="error">{errors.email}</span>}
         </label>
         <br />
         <label>
           Birth Date:
-          <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} />
+          <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} required/>
           {errors.birthDate && <span className="error">{errors.birthDate}</span>}
         </label>
         <br />
@@ -172,7 +172,7 @@ const Signup = () => {
         <br />
         <label>
           DNI:
-          <input type="text" name="dni" value={formData.dni} onChange={handleChange} />
+          <input type="text" name="dni" value={formData.dni} onChange={handleChange} required/>
           {errors.dni && <span className="error">{errors.dni}</span>}
         </label>
         <br />
