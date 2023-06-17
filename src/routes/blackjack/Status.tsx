@@ -11,15 +11,15 @@ const Status: React.FC<StatusProps> = ({ message, balance, winnings }) => {
   let displayedMessage = message;
 
   if (message === "You Win!") {
-    displayedMessage = `${message} +$${winnings}!`;
-  } else if (message === "Dealer Wins!" || message === "Bust!") displayedMessage = `${message} -$${winnings}!`
+    displayedMessage = `${message} +${winnings}c!`;
+  } else if (message === "Dealer Wins!" || message === "Bust!") displayedMessage = `${message} -${winnings}c!`
   return (
     <div className="statusContainer">
       <div className="status">
         <h1 className="value">{displayedMessage}</h1>
       </div>
       <div className="balance">
-        <h1 className="value">{balance !== undefined ? `$${balance}` : '$0'}</h1>
+        <h1 className="value">{balance !== undefined ? `${balance}c` : '0c'}</h1>
       </div>
     </div>
   );

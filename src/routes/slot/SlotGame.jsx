@@ -130,7 +130,7 @@ const SlotGame = () => {
 
         <div>
           <p className="apuestaSlot">
-            Apostar:{" "}
+            <label htmlFor="apuesta">Apostar{" "}</label>
             <input
               type="number"
               name="apuesta"

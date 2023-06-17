@@ -9,8 +9,16 @@
     color: gold;
     background-color: #1C1918;
   }
-
-#title {
+  
+  @media (max-width: 600px) {
+    .Homepage {
+      background-image: none;
+      height: min-content;
+      background-color: black;
+    }
+  }
+  
+  #title {
     font-family: 'Montserrat', sans-serif;
     font-size: 60px;
     font-weight: bold;
@@ -21,9 +29,9 @@
     margin-bottom: 5px;
     margin-top: 20px;
     margin-left: 20%;
-}
-
-#subtitle {
+  }
+  
+  #subtitle {
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     font-weight: bold;
@@ -33,9 +41,10 @@
     margin-bottom: 40px;
     margin-left: 20%;
     margin-top: 5px;
-}
-#description{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  #description {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     width: 50%;
     margin-left: 10%;
@@ -43,9 +52,9 @@
     color: whitesmoke;
     text-align: justify;
     padding: 10px;
-}
-
-#temptation {
+  }
+  
+  #temptation {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     font-weight: bold;
@@ -56,10 +65,10 @@
     margin-bottom: 1px;
     margin-left: 10%;
     margin-top: 30px;
-}
-
-#description2{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  #description2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     width: 50%;
     margin-left: 10%;
@@ -67,9 +76,9 @@
     color: gold;
     text-align: justify;
     padding: 10px;
-}
-
-#games {
+  }
+  
+  #games {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     font-weight: bold;
@@ -80,4 +89,4 @@
     margin-bottom: 1px;
     margin-left: 10%;
     margin-top: 5px;
-}
+  }

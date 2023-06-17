@@ -12,7 +12,6 @@
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     border: 2px solid gold;
     margin: 10px;
     background-image: url("../img/moqueta.webp");
@@ -40,6 +39,11 @@ input[type="password"] {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: 5px;
+}
+
+.precio{
+  padding: 1%;
+  width: 100%;
 }
 
 button[type="submit"] {

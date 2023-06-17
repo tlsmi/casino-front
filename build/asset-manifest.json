@@ -1,19 +1,35 @@
 {
   "files": {
-    "main.css": "/static/css/main.e09f9df9.css",
-    "main.js": "/static/js/main.b1c4cc76.js",
+    "main.css": "/static/css/main.63d64040.css",
+    "main.js": "/static/js/main.be230fa3.js",
     "static/js/787.98e63238.chunk.js": "/static/js/787.98e63238.chunk.js",
     "static/media/casino-background.webp": "/static/media/casino-background.213f7ce54c425423f6e5.webp",
     "static/media/moqueta.webp": "/static/media/moqueta.b1da5b54081aad72b0c0.webp",
     "static/media/profile-casino.webp": "/static/media/profile-casino.94fdde7aedcb326d528e.webp",
+    "static/media/Casino.ttf": "/static/media/Casino.88ada444b7841f57cb8a.ttf",
+    "static/media/logins.webp": "/static/media/logins.3f5036341b97c7d2193e.webp",
+    "static/media/ruleta-logo.webp": "/static/media/ruleta-logo.7bd86d8d7b3ad5b1ea21.webp",
+    "static/media/ruleta.webp": "/static/media/ruleta.14e9b1ca4bdc2742dd5d.webp",
+    "static/media/slot-logo.webp": "/static/media/slot-logo.50c2304966fb5fbbb6a5.webp",
+    "static/media/logo-blackjack.webp": "/static/media/logo-blackjack.1318819b5ec291a20313.webp",
+    "static/media/tabla.webp": "/static/media/tabla.9553101bee7a016e6274.webp",
     "static/media/ficha-roja.webp": "/static/media/ficha-roja.5a9c54d09565a483e3b3.webp",
+    "static/media/fichas.webp": "/static/media/fichas.b6687b5892aa6eec1485.webp",
+    "static/media/homepage.webp": "/static/media/homepage.97356e1b651edb89c58e.webp",
+    "static/media/ficha1Vacia.webp": "/static/media/ficha1Vacia.c980d8fe3abceccda58e.webp",
+    "static/media/ficha50Vacia.webp": "/static/media/ficha50Vacia.5b014e14735574ba1ea8.webp",
+    "static/media/ficha100Vacia.webp": "/static/media/ficha100Vacia.17f99aa4c801e9576bdb.webp",
+    "static/media/ficha25Vacia.webp": "/static/media/ficha25Vacia.253517a4bab41f5bf451.webp",
+    "static/media/ficha10Vacia.webp": "/static/media/ficha10Vacia.8df32618de831a98a5d3.webp",
+    "static/media/ficha5Vacia.webp": "/static/media/ficha5Vacia.2d02126ba2d6bb00c8c8.webp",
+    "static/media/bola.webp": "/static/media/bola.6ca0e5feee4ec5db43a7.webp",
     "index.html": "/index.html",
-    "main.e09f9df9.css.map": "/static/css/main.e09f9df9.css.map",
-    "main.b1c4cc76.js.map": "/static/js/main.b1c4cc76.js.map",
+    "main.63d64040.css.map": "/static/css/main.63d64040.css.map",
+    "main.be230fa3.js.map": "/static/js/main.be230fa3.js.map",
     "787.98e63238.chunk.js.map": "/static/js/787.98e63238.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e09f9df9.css",
-    "static/js/main.b1c4cc76.js"
+    "static/css/main.63d64040.css",
+    "static/js/main.be230fa3.js"
   ]
 }

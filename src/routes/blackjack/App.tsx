@@ -244,34 +244,6 @@ const App: React.FC = () => {
     setGameState(GameState.INIT);
   };
 
-  const drawCard = (dealType: Deal) => {
-    if (deck.length > 0) {
-      const randomIndex = Math.floor(Math.random() * deck.length);
-      const card = deck[randomIndex];
-      deck.splice(randomIndex, 1);
-      setDeck([...deck]);
-      console.log("Remaining Cards:", deck.length);
-      switch (card.suit) {
-        case "PICAS":
-          dealCard(dealType, card.value, "♠");
-          break;
-        case "DIAMANTES":
-          dealCard(dealType, card.value, "♦");
-          break;
-        case "TREBOLES":
-          dealCard(dealType, card.value, "♣");
-          break;
-        case "CORAZONES":
-          dealCard(dealType, card.value, "♥");
-          break;
-        default:
-          break;
-      }
-    } else {
-      alert("All cards have been drawn");
-    }
-  };
-
   const dealCard = (dealType: Deal, value: string, suit: string) => {
     switch (dealType) {
       case Deal.USER:

@@ -58,11 +58,6 @@ export default function Root() {
               </Link>
             </li>
             <li className='rootli'>
-              <Link className='roota' to='/games'>
-                Games
-              </Link>
-            </li>
-            <li className='rootli'>
               <Link className='roota' to='/help'>
                 Help
               </Link>
@@ -70,6 +65,11 @@ export default function Root() {
             <li className='rootli' onClick={handleProfileClick}>
               <Link className='roota' to='/buy'>
                 Buy Coins
+              </Link>
+            </li>
+            <li className='rootli' id='profileNav'>
+              <Link className='roota' to='/profile' onClick={handleProfileClick}>
+                <img src={fichaRojaImg} width='100px' height='100px' alt='Profile' id='fichaRoja' />
               </Link>
             </li>
           </ul>

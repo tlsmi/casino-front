@@ -47,8 +47,8 @@ const Controls: React.FC<ControlsProps> = ({ balance, gameState, buttonState, be
       return (
         <div className="controlsContainer">
           <div className="betContainer">
-            <h4>Amount:</h4>
-            <input autoFocus type='number' value={amount} onChange={amountChange} className={inputStyle} />
+            <label htmlFor="apuesta">Amount:</label>
+            <input autoFocus type='number' value={amount} onChange={amountChange} className={inputStyle} id='apuesta'/>
           </div>
           <button onClick={() => onBetClick()} className="button">Bet</button>
         </div>

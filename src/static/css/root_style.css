@@ -8,7 +8,7 @@
 
 .rootli {
   display: inline-block;
-  width: 24%;
+  width: 10%;
   text-align: center;
   margin-right: 1%;
   padding: 10px 15px;
@@ -20,13 +20,12 @@
 }
 
 #profileNav{
-  margin-left: 11%;
-  margin-right: 1%;
+  margin-left: 10%;
   width: 12%;
 }
 
 #homepageNav{
-  margin-right: 11%;
+  margin-right: 10%;
   width: 12%;
 }
 
@@ -82,7 +81,9 @@
     display: none;
     margin-right: 0;
   }
-
+  .rootli{
+    width: 24%;
+  }
   #profileNav{
   margin-left: 0;
   margin-right: 0;
@@ -103,6 +104,8 @@
     flex-direction: column;
     align-items: center;
   }
+
+  
 
   .rootul.responsive li {
     display: block;

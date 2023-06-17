@@ -3,13 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 120vh;
+    height: 91.8vh;
     background-color: black;
   }
   
   .help-title {
     color: gold;
-    text-decoration: underline;
     font-size: 50px;
     margin-bottom: 20px;
   }
