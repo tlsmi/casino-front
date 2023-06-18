@@ -11,7 +11,8 @@ export default function Root() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  console.log(window.location.href);
+  console.log(sessionStorage.getItem('token'));
+  console.log( window.location.href);
   if (
     sessionStorage.getItem('token') === null &&
     window.location.href !== 'http://localhost:3000/login' &&
@@ -19,8 +20,7 @@ export default function Root() {
     window.location.href !== 'http://localhost:3000/' &&
     window.location.href !== 'http://localhost:3000/games' &&
     window.location.href !== 'http://localhost:3000/aboutus' &&
-    window.location.href !== 'http://localhost:3000/help' &&
-    window.location.href === 'http://localhost:3000/buy'
+    window.location.href !== 'http://localhost:3000/help'
   ) {
     window.location.href = '/login';
   }
