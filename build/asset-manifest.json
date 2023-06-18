@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.63d64040.css",
-    "main.js": "/static/js/main.be230fa3.js",
+    "main.js": "/static/js/main.f8d1f408.js",
     "static/js/787.98e63238.chunk.js": "/static/js/787.98e63238.chunk.js",
     "static/media/casino-background.webp": "/static/media/casino-background.213f7ce54c425423f6e5.webp",
     "static/media/moqueta.webp": "/static/media/moqueta.b1da5b54081aad72b0c0.webp",
@@ -25,11 +25,11 @@
     "static/media/bola.webp": "/static/media/bola.6ca0e5feee4ec5db43a7.webp",
     "index.html": "/index.html",
     "main.63d64040.css.map": "/static/css/main.63d64040.css.map",
-    "main.be230fa3.js.map": "/static/js/main.be230fa3.js.map",
+    "main.f8d1f408.js.map": "/static/js/main.f8d1f408.js.map",
     "787.98e63238.chunk.js.map": "/static/js/787.98e63238.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.63d64040.css",
-    "static/js/main.be230fa3.js"
+    "static/js/main.f8d1f408.js"
   ]
 }
