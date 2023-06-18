@@ -15,12 +15,12 @@ export default function Root() {
   console.log( window.location.href);
   if (
     sessionStorage.getItem('token') === null &&
-    window.location.href !== 'https://casino-front-six.vercel.app/login' &&
-    window.location.href !== 'https://casino-front-six.vercel.app/signup' &&
-    window.location.href !== 'https://casino-front-six.vercel.app/' &&
-    window.location.href !== 'https://casino-front-six.vercel.app/games' &&
-    window.location.href !== 'https://casino-front-six.vercel.app/aboutus' &&
-    window.location.href !== 'https://casino-front-six.vercel.app/help'
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/login' &&
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/signup' &&
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/' &&
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/games' &&
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/aboutus' &&
+    window.location.href !== '  https://casino-front-3gy9jsnh0-tlsmi.vercel.app/help'
   ) {
     window.location.href = '/login';
   }
