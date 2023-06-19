@@ -20,7 +20,7 @@ const SlotGame = () => {
 
   const spin = async () => {
     try {
-      const response = await fetch("http://casino.z101.alumnes-esliceu.tk/games/slot/spin", {
+      const response = await fetch("https://casino.z101.alumnes-esliceu.tk/games/slot/spin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const SlotGame = () => {
   // Definimos la función para la solicitud Fetch
   const getCredito = async () => {
     try {
-      const response = await fetch('http://casino.z101.alumnes-esliceu.tk/credito', {
+      const response = await fetch('https://casino.z101.alumnes-esliceu.tk/credito', {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

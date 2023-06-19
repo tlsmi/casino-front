@@ -26,7 +26,7 @@ const Password = () => {
     try {
       const token = sessionStorage.getItem('token');
 
-      const response = await fetch('http://casino.z101.alumnes-esliceu.tk/profile/password', {
+      const response = await fetch('https://casino.z101.alumnes-esliceu.tk/profile/password', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',

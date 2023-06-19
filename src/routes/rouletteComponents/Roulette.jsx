@@ -46,7 +46,7 @@ const Roulette = () => {
 
     async function getSaldo() {
         try {
-            const response = await fetch('http://casino.z101.alumnes-esliceu.tk/credito', {
+            const response = await fetch('https://casino.z101.alumnes-esliceu.tk/credito', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -383,7 +383,7 @@ const Roulette = () => {
             if (!playing) {
                 playing = true;
 
-                const response = await fetch("http://casino.z101.alumnes-esliceu.tk/games/roulette", {
+                const response = await fetch("https://casino.z101.alumnes-esliceu.tk/games/roulette", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

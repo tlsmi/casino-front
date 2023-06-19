@@ -13,7 +13,7 @@ const DeleteUserForm = () => {
     try {
       const token = sessionStorage.getItem('token');
 
-      const response = await fetch('http://casino.z101.alumnes-esliceu.tk/deleteUser', {
+      const response = await fetch('https://casino.z101.alumnes-esliceu.tk/deleteUser', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

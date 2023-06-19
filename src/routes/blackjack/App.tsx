@@ -57,7 +57,7 @@ const App: React.FC = () => {
   // Definimos la función para la solicitud Fetch
   const getCredito = async () => {
     try {
-      const response = await fetch("http://casino.z101.alumnes-esliceu.tk/credito", {
+      const response = await fetch("https://casino.z101.alumnes-esliceu.tk/credito", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const App: React.FC = () => {
   const start = async () => {
     try {
       const response = await fetch(
-        "http://casino.z101.alumnes-esliceu.tk/games/blackjack/start",
+        "https://casino.z101.alumnes-esliceu.tk/games/blackjack/start",
         {
           method: "POST",
           headers: {
@@ -190,7 +190,7 @@ const App: React.FC = () => {
   const getCardDealer = async () => {
     try {
       const response = await fetch(
-        "http://casino.z101.alumnes-esliceu.tk/games/blackjack/stand",
+        "https://casino.z101.alumnes-esliceu.tk/games/blackjack/stand",
         {
           method: "POST",
           headers: {
@@ -317,7 +317,7 @@ const App: React.FC = () => {
   const hit = async () => {
     try {
       const response = await fetch(
-        "http://casino.z101.alumnes-esliceu.tk/games/blackjack/hit",
+        "https://casino.z101.alumnes-esliceu.tk/games/blackjack/hit",
         {
           method: "POST",
           headers: {
@@ -375,7 +375,7 @@ const App: React.FC = () => {
   const win = async (result:string) => {
     try {
       const response = await fetch(
-        "http://casino.z101.alumnes-esliceu.tk/games/blackjack/win",
+        "https://casino.z101.alumnes-esliceu.tk/games/blackjack/win",
         {
           method: "POST",
           headers: {
