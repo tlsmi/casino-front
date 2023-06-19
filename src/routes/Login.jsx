@@ -18,7 +18,7 @@ const Login = () => {
         e.preventDefault();
         if (validateForm()) {
             try {
-                const response = await fetch('http://localhost:8080/login', {
+                const response = await fetch('http://casino.z101.alumnes-esliceu.tk/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

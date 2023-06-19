@@ -30,7 +30,7 @@ const Signup = () => {
     // Validar los datos antes de enviar la solicitud
     if (validateForm()) {
       try {
-        const response = await fetch('http://localhost:8080/signup', {
+        const response = await fetch('http://casino.z101.alumnes-esliceu.tk/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

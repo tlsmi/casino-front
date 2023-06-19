@@ -31,7 +31,7 @@ const Profile = () => {
             try {
                 const token = sessionStorage.getItem('token');
 
-                const response = await fetch('http://localhost:8080/getprofile', {
+                const response = await fetch('http://casino.z101.alumnes-esliceu.tk/getprofile', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const Profile = () => {
         try {
             const token = sessionStorage.getItem('token');
 
-            const response = await fetch('http://localhost:8080/profile', {
+            const response = await fetch('http://casino.z101.alumnes-esliceu.tk/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const Profile = () => {
                 sessionStorage.setItem('token', token);
 
                 // Realizar la petición GET para obtener el perfil actualizado
-                const getProfileResponse = await fetch('http://localhost:8080/getprofile', {
+                const getProfileResponse = await fetch('http://casino.z101.alumnes-esliceu.tk/getprofile', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

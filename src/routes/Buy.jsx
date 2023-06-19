@@ -11,7 +11,7 @@ const BuyForm = () => {
         event.preventDefault();
 
         if (selectedOption !== '') {
-            const endpoint = `http://localhost:8080/buy/${selectedOption}`;
+            const endpoint = `http://casino.z101.alumnes-esliceu.tk/buy/${selectedOption}`;
             console.log('Sending request to:', endpoint);
 
             const formData = new FormData(event.target);
